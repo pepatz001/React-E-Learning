@@ -20,7 +20,7 @@ class AllTopic extends React.Component {
     
       mapContent = (list) => {
         var content = [{topic:"",name:"",code:""}]
-        content = list.filter(item => item.name === this.state.department).map(list => list.content)
+        content = list.filter(item => item.name === localStorage.getItem('departmentClick')).map(list => list.content)
         const topic = []
         content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
         this.setState({

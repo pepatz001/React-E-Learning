@@ -53,6 +53,11 @@ class MenuLayout extends React.Component {
 
   handleClick = (e, { name }) => this.setState({ active: name })
 
+  handleClickDepartment = (departmentName) => {
+    localStorage.setItem('departmentClick', departmentName)
+    this.props.history.replace('/AllTopic') //redirect
+  }
+
   logout = () => {
     this.props.history.replace('/login') //redirect
     localStorage.clear()
@@ -70,8 +75,8 @@ class MenuLayout extends React.Component {
             <Menu.Item className='navbarItem' key='Home' name='Home' active={active === 'Home'} onClick={(e) => this.props.history.replace('/')} />
             <Dropdown item text="Operation">
               <Dropdown.Menu>
-                <Dropdown.Item onClick={(e) => this.handleClickTopic('Cinema')}>Cinema</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.handleClickTopic('Bowling')}>Bowling</Dropdown.Item>
+                <Dropdown.Item className='dropdownColor' onClick={(e) => this.handleClickDepartment('Cinema')}>Cinema</Dropdown.Item>
+                <Dropdown.Item className='dropdownColor' onClick={(e) => this.handleClickDepartment('Bowling')}>Bowling</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Menu.Item className='navbarItem' key='Board' name='Board' active={active === 'Board'} onClick={this.handleClick} />
