@@ -1,0 +1,27 @@
+{
+  "name": "webtech-proj",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "express": "^4.16.2",
+    "localStorage": "^1.0.3",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-ckeditor-wrapper": "^1.1.2",
+    "react-dom": "^16.1.1",
+    "react-images-upload": "^1.1.1",
+    "react-images-uploader": "^1.1.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.0"
+  },
+  "scripts": {
+    "start": "set PORT=3006 && react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
