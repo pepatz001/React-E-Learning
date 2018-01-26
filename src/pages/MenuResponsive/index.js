@@ -32,9 +32,6 @@ class MenuResponsive extends React.Component {
             <Menu.Item name='camera'>
               Quiz
             </Menu.Item>
-            <Menu.Item name='camera'>
-              Cinema
-            </Menu.Item>
           </Sidebar>
           <Sidebar.Pusher
             dimmed={visible}
