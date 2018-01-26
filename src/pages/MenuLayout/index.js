@@ -68,9 +68,14 @@ class MenuLayout extends React.Component {
               <Image size="tiny" src='/assets/images/major-logo-1.png' />
             </Menu.Item>
             <Menu.Item className='navbarItem' key='Home' name='Home' active={active === 'Home'} onClick={(e) => this.props.history.replace('/')} />
-            <Menu.Item className='navbarItem' key='Case Study' name='Case Study' active={active === 'Case Study'} onClick={this.handleClick} />
+            <Dropdown item text="Operation">
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={(e) => this.handleClickTopic('Cinema')}>Cinema</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.handleClickTopic('Bowling')}>Bowling</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Menu.Item className='navbarItem' key='Board' name='Board' active={active === 'Board'} onClick={this.handleClick} />
             <Menu.Item className='navbarItem' key='quiz' name='quiz' active={active === 'quiz'} onClick={this.handleClick} />
-            <Menu.Item className='navbarItem' key='ranking' name='ranking' active={active === 'ranking'} onClick={this.handleClick} />
             <Menu.Item className='navbarItem' key={this.state.department} name={this.state.department} active={active === this.state.department} onClick={(e) => this.props.history.replace('AllTopic')} />
             <Menu.Menu position="right">
               <Menu.Item className='navbarItem' key='logout' name='logout' onClick={(e) => this.logout()} />
