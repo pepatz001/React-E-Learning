@@ -26,7 +26,7 @@ class Navbar extends React.Component {
   
       return (
         <div>
-          <Responsive {...Responsive.onlyMobile}>
+          <Responsive minWidth={Responsive.onlyMobile.minWidth}>
             {/* <NavBarMobile
               leftItems={leftItems}
               onPusherClick={this.handlePusher}
