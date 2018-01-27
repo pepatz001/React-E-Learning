@@ -68,7 +68,7 @@ class MenuResponsive extends React.Component {
             onClick={this.handlePusher}
             style={{ minHeight: "100vh" , top: '60px' , background: 'rgba(28,28,35,0.85)'}}
           >
-            <Menu fixed="top" inverted>
+            <Menu fixed="top">
               <Menu.Item>
                 <Image size="tiny" src='/assets/images/major-logo-1.png' />
               </Menu.Item>
