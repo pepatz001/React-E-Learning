@@ -16,7 +16,7 @@ class Main extends React.Component {
           <Responsive minWidth={Responsive.onlyTablet.minWidth}>
             <Segment textAlign='center'>
               {/* This Code */}
-
+              
               <Image src='/assets/images/partner.png' size='large' centered/>
               <Container textAlign='center'>
               Copyright © 2015 Major Cineplex Group Plc. All original contents of www.majorcineplex.com ("Site") <br/>
@@ -27,7 +27,7 @@ class Main extends React.Component {
           <Responsive {...Responsive.onlyMobile}>
             <Segment basic textAlign='left'>
               {/* This Code */}
-              
+
             </Segment>
             <Image src='/assets/images/partner.png' size='large' centered/>
             <Container textAlign='center'>
