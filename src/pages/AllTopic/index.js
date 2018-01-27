@@ -6,7 +6,7 @@ import Navbar from '../Navbar'
 // import _ from 'lodash'
 import { getDepartment , getUserDepartment } from '../../api'
 // import CKEditor from 'react-ckeditor-wrapper'
-import { Divider , Container , Menu , Segment, Grid , Responsive , Image } from "semantic-ui-react"
+import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon     } from "semantic-ui-react"
 
 class AllTopic extends React.Component {
 
@@ -15,10 +15,19 @@ class AllTopic extends React.Component {
         code: "",
         contents: [],
         topics: [],
-        activeItem: ''
-      }
+        activeItem: '',
+        activeIndex: 0
+    }
     
-      mapContent = (list) => {
+    handleClick = (e, titleProps) => {
+        const { index } = titleProps
+        const { activeIndex } = this.state
+        const newIndex = activeIndex === index ? -1 : index
+    
+        this.setState({ activeIndex: newIndex })
+    }
+    
+    mapContent = (list) => {
         var content = [{topic:"",name:"",code:""}]
         content = list.filter(item => item.name === localStorage.getItem('departmentClick')).map(list => list.content)
         const topic = []
@@ -29,9 +38,9 @@ class AllTopic extends React.Component {
           activeItem: content[0].name,
           code: content[0].code
         })
-      }
+    }
     
-      mapUser = (list) => {
+    mapUser = (list) => {
         const item = list.filter(item => item.username === localStorage.username).map(item => item.department)
         this.setState({department: item[0]})
         localStorage.setItem('department', this.state.department)
@@ -42,23 +51,23 @@ class AllTopic extends React.Component {
           .then(data => this.mapContent(data))
           .catch(err => console.error('Something went wrong.'))
         }
-      }
+    }
     
-      componentWillMount() { 
+    componentWillMount() { 
         getUserDepartment()
         .then(user => this.mapUser(user))
         .catch(err => console.error('Something went wrong.'))
-      }
+    }
       
-      handleItemClick = (name,code) => {
+    handleItemClick = (name,code) => {
         this.setState({ 
           activeItem: name,
           code: code
         })
-      }
+    }
     
     render() {
-        const { activeItem , topics , contents } = this.state
+        const { activeItem , topics , contents , activeIndex } = this.state
         return (
         <div className='body'>
             {/* <MenuLayout history={this.props.history}/>
@@ -103,10 +112,34 @@ class AllTopic extends React.Component {
                             </Segment>
                         </Grid.Column>
                         </Grid>
+                        <Image src='/assets/images/partner.png' size='large' centered/>
+                        <Container textAlign='center'>
+                        Copyright © 2015 Major Cineplex Group Plc. All original contents of www.majorcineplex.com ("Site") <br/>
+                        including text, graphics, interfaces and design thereof are all rights reserved.
+                        </Container>
                     </Segment>
                 </Responsive>
                 <Responsive {...Responsive.onlyMobile}>
                     <Segment basic textAlign='left'>
+                            { topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                topics.map((item,index) => //Loop
+                                    <Accordion>
+                                        <Accordion.Title active={activeIndex === index} index={index} onClick={this.handleClick}>
+                                            <Icon name='dropdown' />
+                                            {item}
+                                        </Accordion.Title>
+                                        <Accordion.Content active={activeIndex === index}>
+                                            <Menu inverted vertical className='Responsive'>
+                                            { contents.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                                contents.filter(list => list.topic === item).map((thisItem) => //Loop
+                                                    <Menu.Item name={thisItem.name} active={activeItem === thisItem.name} onClick={(e) => this.handleItemClick(thisItem.name,thisItem.code)} />
+                                                )
+                                                : null }
+                                            </Menu>
+                                        </Accordion.Content>
+                                    </Accordion>
+                                )
+                                : null }
                         <h2>{this.state.activeItem}</h2>
                         <div>
                             <div dangerouslySetInnerHTML={{ __html: this.state.code }}></div>
@@ -125,3 +158,14 @@ class AllTopic extends React.Component {
 }
 
 export default AllTopic
+
+                                {/* <Menu.Item>
+                                    <Menu.Header>{item}</Menu.Header>
+                                    <Menu.Menu>
+                                        { contents.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        contents.filter(list => list.topic === item).map((thisItem) => //Loop
+                                            <Menu.Item name={thisItem.name} active={activeItem === thisItem.name} onClick={(e) => this.handleItemClick(thisItem.name,thisItem.code)} />
+                                        )
+                                        : null }
+                                    </Menu.Menu>
+                                    </Menu.Item> */}

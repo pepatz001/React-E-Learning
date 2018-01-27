@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Kanit:300,400,500,700');
 /* ------------------------------------- */
+.ui.accordion .title:not(.ui) {
+    color: #FFDFAA !important;
+    font-size: 15px !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
+}
 .ui.item.dropdown > .text {
     color: #FFDFAA;
     font-size: 18px;
@@ -158,13 +164,11 @@ p , ul , h2{
 .ui.divider:not(.vertical):not(.horizontal) {
     border-top: 1px solid #F1B600;
 }
-.ui.grid>[class*="thirteen wide"].column {
-    padding-bottom: 160px !important;
-}
-.ui.grid>[class*="three wide"].column {
-    padding-bottom: 160px !important;
-}
 .ui.visible.right.overlay.sidebar {
+    width: 50%;
+    padding-top: 20px;
+}
+.ui.animating.right.overlay.sidebar {
     width: 50%;
     padding-top: 20px;
 }
@@ -172,4 +176,24 @@ p , ul , h2{
     color: #FFDFAA !important;
     font-family: "Kanit",sans-serif !important;
     font-weight: 400 !important;
+}
+.ui.vertical.Responsive.menu {
+    width: auto !important;
+}
+.ui.vertical.Responsive.menu > a{
+    color: #FFDFAA !important;
+    font-size: 14px !important;
+    font-family: "Kanit",sans-serif !important;
+}
+.ui.inverted.Responsive.menu .active.item:hover{
+    color: #F1B600 !important;
+    font-size: 14px !important;
+    font-family: "Kanit",sans-serif !important;
+    background: 0 0 !important;
+}
+.ui.inverted.Responsive.menu .active.item{
+    color: #F1B600 !important;
+    font-size: 14px !important;
+    font-family: "Kanit",sans-serif !important;
+    background: 0 0 !important;
 }

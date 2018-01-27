@@ -55,7 +55,7 @@ class MenuLayout extends React.Component {
 
   handleClickDepartment = (departmentName) => {
     localStorage.setItem('departmentClick', departmentName)
-    this.props.history.replace('/AllTopic') //redirect
+    this.props.history.replace('/Crpdaz') //redirect
   }
 
   logout = () => {
@@ -72,7 +72,9 @@ class MenuLayout extends React.Component {
             <Menu.Item>
               <Image size="tiny" src='/assets/images/major-logo-1.png' />
             </Menu.Item>
-            <Menu.Item className='navbarItem' key='Home' name='Home' active={active === 'Home'} onClick={(e) => this.props.history.replace('/')} />
+            <Menu.Item className='navbarItem' onClick={(e) => this.props.history.replace('/')} >
+              <Icon name='home' />Home
+            </Menu.Item>
             <Dropdown item text="Operation">
               <Dropdown.Menu>
                 <Dropdown.Item className='dropdownColor' onClick={(e) => this.handleClickDepartment('Cinema')}>Cinema</Dropdown.Item>
@@ -80,8 +82,8 @@ class MenuLayout extends React.Component {
               </Dropdown.Menu>
             </Dropdown>
             <Menu.Item className='navbarItem' key='support' name='support' active={active === 'support'} onClick={(e) => this.handleClickDepartment('Support')} />
-            <Menu.Item className='navbarItem' key='Board' name='Board' active={active === 'Board'} onClick={this.handleClick} />
-            <Menu.Item className='navbarItem' key='quiz' name='quiz' active={active === 'quiz'} onClick={this.handleClick} />
+            <Menu.Item className='navbarItem' key='forums' name='forums' active={active === 'forums'} onClick={this.handleClick} />
+            {/* <Menu.Item className='navbarItem' key='quiz' name='quiz' active={active === 'quiz'} onClick={this.handleClick} /> */}
             <Menu.Menu position="right">
               <Menu.Item className='navbarItem' key='logout' name='logout' onClick={(e) => this.logout()} />
             </Menu.Menu>
