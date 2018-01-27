@@ -73,7 +73,7 @@ class MenuLayout extends React.Component {
               <Image size="tiny" src='/assets/images/major-logo-1.png' />
             </Menu.Item>
             <Menu.Item className='navbarItem' onClick={(e) => this.props.history.replace('/')} >
-              <Icon name='home' />Home
+              <Icon name='home'/>Home
             </Menu.Item>
             <Dropdown item text="Operation">
               <Dropdown.Menu>

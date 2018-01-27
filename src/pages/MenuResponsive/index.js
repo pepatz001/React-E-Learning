@@ -35,7 +35,7 @@ class MenuResponsive extends React.Component {
         <Sidebar.Pushable>
           <Sidebar as={Menu} animation="overlay" icon="labeled" direction='right' inverted vertical visible={visible}>
             <Menu.Item>
-            <Image centered size="tiny" src='/assets/images/major-logo.png' />
+            <Image centered size="tiny" src='/assets/images/major-logo.png'/>
             </Menu.Item>
             <Menu.Item name='home' onClick={(e) => this.props.history.replace('/')}>
               Home
@@ -65,7 +65,6 @@ class MenuResponsive extends React.Component {
             </Menu.Item> */}
           </Sidebar>
           <Sidebar.Pusher
-            dimmed={visible}
             onClick={this.handlePusher}
             style={{ minHeight: "100vh" , top: '60px' , background: 'rgba(28,28,35,0.85)'}}
           >
