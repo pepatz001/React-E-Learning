@@ -204,3 +204,16 @@ p , ul , h2{
 .ui.menu .item>i.icon {
     color: #FFDFAA !important;
 }
+
+.carousel .control-dots {
+    padding-left: 0;
+}
+.ui.left.aligned.header {
+    color: #FFDFAA !important;
+}
+.ui.segment.feedNew {
+    background: rgba(255, 255, 255, 0.85);
+}
+.banner {
+    margin-top: 15px;
+}

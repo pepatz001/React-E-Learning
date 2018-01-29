@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sidebar , Menu , Responsive , Image , Icon , Accordion } from 'semantic-ui-react'
+import { Sidebar , Menu , Image , Icon , Accordion } from 'semantic-ui-react'
 
 class MenuResponsive extends React.Component {
   
@@ -29,7 +29,7 @@ class MenuResponsive extends React.Component {
   }
 
   render(){
-    const { activeItem , visible , activeIndex } = this.state
+    const { visible , activeIndex } = this.state
 
     return (
         <Sidebar.Pushable>

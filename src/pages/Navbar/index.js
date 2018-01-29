@@ -7,22 +7,9 @@ const NavBarChildren = ({ children }) => (
     <Container>{children}</Container>
 );
 
-class Navbar extends React.Component {
-    state = {
-      visible: false
-    };
-  
-    handlePusher = () => {
-      const { visible } = this.state;
-  
-      if (visible) this.setState({ visible: false });
-    };
-  
-    handleToggle = () => this.setState({ visible: !this.state.visible });
-  
+class Navbar extends React.Component { 
     render() {
       const { children } = this.props;
-      const { visible } = this.state;
   
       return (
         <div>

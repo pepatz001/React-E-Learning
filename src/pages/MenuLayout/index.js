@@ -1,6 +1,6 @@
 import React from 'react'
-import { Divider , Dropdown, Container, Icon, Image, Menu, Sidebar, Responsive, Segment, Grid } from "semantic-ui-react"
-import { publishPost, getAllPosts , getDepartment , getUserDepartment } from '../../api'
+import { Dropdown , Icon, Image, Menu } from "semantic-ui-react"
+import { getDepartment , getUserDepartment } from '../../api'
 
 class MenuLayout extends React.Component {
   
@@ -43,13 +43,6 @@ class MenuLayout extends React.Component {
     .then(user => this.mapUser(user))
     .catch(err => console.error('Something went wrong.'))
   }
-  
-  handleItemClick = (name,code) => {
-    this.setState({ 
-      activeItem: name,
-      code: code
-    })
-  }
 
   handleClick = (e, { name }) => this.setState({ active: name })
 
@@ -64,7 +57,7 @@ class MenuLayout extends React.Component {
   }
 
   render(){
-    const { activeItem , topics , contents } = this.state
+    const { topics , contents } = this.state
     const { active } = this.state
     return (
       <div>

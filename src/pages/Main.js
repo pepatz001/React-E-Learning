@@ -6,7 +6,7 @@ import Navbar from './Navbar'
 // import _ from 'lodash'
 // import { publishPost, getAllPosts , getDepartment , getUserDepartment } from '../api'
 // import CKEditor from 'react-ckeditor-wrapper'
-import { Container , Image , Responsive , Segment } from "semantic-ui-react"
+import { Container , Image , Responsive , Segment , Feed , Grid , Divider , Header , Label } from "semantic-ui-react"
 import { Carousel } from 'react-responsive-carousel'
 
 class Main extends React.Component {
@@ -17,7 +17,7 @@ class Main extends React.Component {
           <Responsive minWidth={Responsive.onlyTablet.minWidth}>
             <Segment textAlign='center'>
               {/* This Code */}
-              <Carousel>
+              <Carousel autoPlay showThumbs={false} className='banner'>
                 <div>
                     <img src="assets/images/1.jpeg" />
                 </div>
@@ -28,6 +28,57 @@ class Main extends React.Component {
                     <img src="assets/images/3.jpeg" />
                 </div>
               </Carousel>
+              <Divider/>
+              <Grid>
+                <Grid.Column width={6}>
+                  <Header as='h2' textAlign='left'>Topic</Header>
+                  <Segment className='feedNew'>
+                    <Feed>
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Date>3 days ago</Feed.Date>
+                          <Feed.Summary>
+                            <Label color='red' horizontal>Update!</Label>
+                            <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                          </Feed.Summary>
+                        </Feed.Content>
+                      </Feed.Event>
+                      <Feed.Event>
+                      <Feed.Content>
+                        <Feed.Date>3 days ago</Feed.Date>
+                        <Feed.Summary>
+                          <Label color='red' horizontal>New!</Label>
+                          <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                        </Feed.Summary>
+                      </Feed.Content>
+                    </Feed.Event>
+                    </Feed>
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={10}>
+                  <Header as='h2' textAlign='left'>Forums</Header>
+                  <Segment className='feedNew'>
+                    <Feed>
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Date>3 days ago</Feed.Date>
+                          <Feed.Summary>
+                            <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                          </Feed.Summary>
+                        </Feed.Content>
+                      </Feed.Event>
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Date>3 days ago</Feed.Date>
+                          <Feed.Summary>
+                            <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                          </Feed.Summary>
+                        </Feed.Content>
+                      </Feed.Event>
+                    </Feed>
+                  </Segment>
+                </Grid.Column>
+              </Grid>
               <Image src='/assets/images/partner.png' size='large' centered/>
               <Container textAlign='center'>
               Copyright © 2015 Major Cineplex Group Plc. All original contents of www.majorcineplex.com ("Site") <br/>
@@ -38,7 +89,7 @@ class Main extends React.Component {
           <Responsive {...Responsive.onlyMobile}>
             <Segment basic textAlign='left'>
               {/* This Code */}
-              <Carousel>
+              <Carousel autoPlay showThumbs={false}>
                 <div>
                     <img src="assets/images/1.jpeg" />
                 </div>
@@ -49,6 +100,51 @@ class Main extends React.Component {
                     <img src="assets/images/3.jpeg" />
                 </div>
               </Carousel>
+              <Divider/>
+              <Header as='h2' textAlign='left'>Topic</Header>
+              <Segment className='feedNew'>
+                <Feed>
+                  <Feed.Event>
+                    <Feed.Content>
+                      <Feed.Date>3 days ago</Feed.Date>
+                      <Feed.Summary>
+                        <Label color='red' horizontal>Update!</Label>
+                        <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
+                  <Feed.Event>
+                  <Feed.Content>
+                    <Feed.Date>3 days ago</Feed.Date>
+                    <Feed.Summary>
+                      <Label color='red' horizontal>New!</Label>
+                      <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                    </Feed.Summary>
+                  </Feed.Content>
+                </Feed.Event>
+                </Feed>
+              </Segment>
+              <Header as='h2' textAlign='left'>Forums</Header>
+              <Segment className='feedNew'>
+                <Feed>
+                  <Feed.Event>
+                    <Feed.Content>
+                      <Feed.Date>3 days ago</Feed.Date>
+                      <Feed.Summary>
+                        <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
+                  <Feed.Event>
+                    <Feed.Content>
+                      <Feed.Date>3 days ago</Feed.Date>
+                      <Feed.Summary>
+                        <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
+                </Feed>
+              </Segment>
             </Segment>
             <Image src='/assets/images/partner.png' size='large' centered/>
             <Container textAlign='center'>

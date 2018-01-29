@@ -1,6 +1,6 @@
 import React from 'react';
 import { getDepartment , updateDepartment , deleteDepartment , createDepartment , updateContent , deleteContent } from '../../api'
-import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Transition , Input } from 'semantic-ui-react'
+import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Transition } from 'semantic-ui-react'
 import CKEditor from 'react-ckeditor-wrapper';
 
 class Departments extends React.Component {

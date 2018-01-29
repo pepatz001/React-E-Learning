@@ -1,6 +1,5 @@
 import React from 'react'
 import localStorage from 'localStorage'
-import MenuLayout from '../MenuLayout'
 import Navbar from '../Navbar'
 
 // import _ from 'lodash'
