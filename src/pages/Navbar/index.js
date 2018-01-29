@@ -27,15 +27,6 @@ class Navbar extends React.Component {
       return (
         <div>
           <Responsive {...Responsive.onlyMobile}>
-            {/* <NavBarMobile
-              leftItems={leftItems}
-              onPusherClick={this.handlePusher}
-              onToggle={this.handleToggle}
-              rightItems={rightItems}
-              visible={visible}
-            >
-              <NavBarChildren>{children}</NavBarChildren>
-            </NavBarMobile> */}
             <MenuResponsive history={this.props.history}> 
                 <NavBarChildren>{children}</NavBarChildren>
             </MenuResponsive>

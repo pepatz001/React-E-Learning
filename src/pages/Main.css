@@ -115,6 +115,7 @@
 }
 .ui[class*="left aligned"].segment {
     color: #FFDFAA;
+    top: 60px;
 }
 /* ------------------------------------------------ */
 .ui.fixed.menu.footer {

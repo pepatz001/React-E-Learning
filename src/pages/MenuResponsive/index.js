@@ -66,7 +66,7 @@ class MenuResponsive extends React.Component {
           </Sidebar>
           <Sidebar.Pusher
             onClick={this.handlePusher}
-            style={{ minHeight: "100vh" , top: '60px' , background: 'rgba(28,28,35,0.85)'}}
+            style={{ minHeight: "100vh" , background: 'rgba(28,28,35,0.85)'}}
           >
             <Menu fixed="top">
               <Menu.Item>
@@ -84,84 +84,3 @@ class MenuResponsive extends React.Component {
 }
 
 export default MenuResponsive
-
-// const NavBarMobile = ({
-//   children,
-//   leftItems,
-//   onPusherClick,
-//   onToggle,
-//   rightItems,
-//   visible
-// }) => (
-//   <Sidebar.Pushable>
-//     <Sidebar
-//       as={Menu}
-//       animation="overlay"
-//       icon="labeled"
-//       inverted
-//       items={leftItems}
-//       vertical
-//       visible={visible}
-//     />
-//     <Sidebar.Pusher
-//       dimmed={visible}
-//       onClick={onPusherClick}
-//       style={{ minHeight: "100vh" }}
-//     >
-//       <Menu fixed="top" inverted>
-//         <Menu.Item>
-//           <Image size="tiny" src='/assets/images/major-logo-1.png' />
-//         </Menu.Item>
-//         <Menu.Item onClick={onToggle}>
-//           <Icon name="sidebar" />
-//         </Menu.Item>
-//         <Menu.Menu position="right">
-//           {_.map(rightItems, item => <Menu.Item {...item} />)}
-//         </Menu.Menu>
-//       </Menu>
-//       {children}
-//     </Sidebar.Pusher>
-//   </Sidebar.Pushable>
-// )
-
-// const NavBarChildren = ({ children }) => (
-//   <Container style={{ marginTop: "2.5em" }}>{children}</Container>
-// )
-
-// class NavBar extends React.Component {
-//   state = {
-//     visible: false,
-//     active: ''
-//   }
-
-//   handlePusher = () => {
-//     const { visible } = this.state
-
-//     if (visible) this.setState({ visible: false })
-//   }
-
-//   handleToggle = () => this.setState({ visible: !this.state.visible })
-
-//   handleClick = (e, { name }) => this.setState({ active: name })
-
-//   render() {
-//     const { children, leftItems, rightItems } = this.props
-//     const { visible } = this.state
-//     const { active } = this.state
-//     return (
-//       <div>
-//         <Responsive {...Responsive.onlyMobile}>
-//           <NavBarMobile
-//             leftItems={leftItems}
-//             onPusherClick={this.handlePusher}
-//             onToggle={this.handleToggle}
-//             rightItems={rightItems}
-//             visible={visible}
-//           >
-//             <NavBarChildren>{children}</NavBarChildren>
-//           </NavBarMobile>
-//         </Responsive>
-//       </div>
-//     )
-//   }
-// }
