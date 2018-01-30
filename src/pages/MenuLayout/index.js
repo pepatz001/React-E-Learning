@@ -71,11 +71,11 @@ class MenuLayout extends React.Component {
             <Dropdown item text="Operation">
               <Dropdown.Menu>
                 <Dropdown.Item className='dropdownColor' onClick={(e) => this.handleClickDepartment('Cinema')}>Cinema</Dropdown.Item>
-                <Dropdown.Item className='dropdownColor' onClick={(e) => this.handleClickDepartment('Bowling Operation Business Unit')}>Bowling Operation Business Unit</Dropdown.Item>
+                <Dropdown.Item className='dropdownColor' onClick={(e) => this.handleClickDepartment('Bowling Operation Business Unit')}>Bowling</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Menu.Item className='navbarItem' key='support' name='support' active={active === 'support'} onClick={(e) => this.handleClickDepartment('Support')} />
-            <Menu.Item className='navbarItem' key='forums' name='forums' active={active === 'forums'} onClick={this.handleClick} />
+            <Menu.Item className='navbarItem' key='web board' name='web board' active={active === 'web board'} onClick={this.handleClick} />
             {/* <Menu.Item className='navbarItem' key='quiz' name='quiz' active={active === 'quiz'} onClick={this.handleClick} /> */}
             <Menu.Menu position="right">
               <Menu.Item className='navbarItem' key='logout' name='logout' onClick={(e) => this.logout()} />
