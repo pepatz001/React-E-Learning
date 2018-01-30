@@ -51,14 +51,14 @@ class MenuResponsive extends React.Component {
                   Cinema
                 </Menu.Item>
                 <Menu.Item onClick={(e) => this.handleClickDepartment('Bowling Operation Business Unit')}>
-                  Bowling Operation Business Unit
+                  Bowling
                 </Menu.Item>
               </Accordion.Content>
             </Accordion>
             </Menu.Item>
             <Menu.Item className='navbarItem' key='support' name='support' onClick={(e) => this.handleClickDepartment('Support')} />
-            <Menu.Item name='forums'>
-              Forums
+            <Menu.Item name='web board'>
+              Web board
             </Menu.Item>
             {/* <Menu.Item name='camera'>
               Quiz
