@@ -38,7 +38,7 @@ class Main extends React.Component {
                         <Feed.Content>
                           <Feed.Date>3 days ago</Feed.Date>
                           <Feed.Summary>
-                            <Label color='red' horizontal>Update!</Label>
+                            <Label className='gold' horizontal>Update!</Label>
                             <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
                           </Feed.Summary>
                         </Feed.Content>
@@ -47,7 +47,7 @@ class Main extends React.Component {
                       <Feed.Content>
                         <Feed.Date>3 days ago</Feed.Date>
                         <Feed.Summary>
-                          <Label color='red' horizontal>New!</Label>
+                          <Label className='gold' horizontal>New!</Label>
                           <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
                         </Feed.Summary>
                       </Feed.Content>
@@ -56,7 +56,7 @@ class Main extends React.Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={10}>
-                  <Header as='h2' textAlign='left'>Forums</Header>
+                  <Header as='h2' textAlign='left'>Web Board</Header>
                   <Segment className='feedNew'>
                     <Feed>
                       <Feed.Event>
@@ -108,7 +108,7 @@ class Main extends React.Component {
                     <Feed.Content>
                       <Feed.Date>3 days ago</Feed.Date>
                       <Feed.Summary>
-                        <Label color='red' horizontal>Update!</Label>
+                        <Label className='gold' horizontal>Update!</Label>
                         <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
                       </Feed.Summary>
                     </Feed.Content>
@@ -117,14 +117,14 @@ class Main extends React.Component {
                   <Feed.Content>
                     <Feed.Date>3 days ago</Feed.Date>
                     <Feed.Summary>
-                      <Label color='red' horizontal>New!</Label>
+                      <Label className='gold' horizontal>New!</Label>
                       <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
                     </Feed.Summary>
                   </Feed.Content>
                 </Feed.Event>
                 </Feed>
               </Segment>
-              <Header as='h2' textAlign='left'>Forums</Header>
+              <Header as='h2' textAlign='left'>Web Board</Header>
               <Segment className='feedNew'>
                 <Feed>
                   <Feed.Event>

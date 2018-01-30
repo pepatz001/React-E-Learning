@@ -7,6 +7,7 @@ import AdminPage from './pages/AdminPage'
 import Crpdaz from './pages/Crpdaz'
 import Default from './pages/Default'
 import AllTopic from './pages/AllTopic'
+import WebBoard from './pages/WebBoard'
 
 const Routes = () => {
     return (
@@ -18,6 +19,7 @@ const Routes = () => {
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route exact path="/AllTopic" component={AllTopic} />
+                <Route exact path="/WebBoard" component={WebBoard} />
                 <Route exact path="/Crpdaz" component={Crpdaz} />
                 {localStorage.getItem('department') !== 'admin' ? (
                 <Redirect to="/" />

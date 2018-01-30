@@ -66,7 +66,7 @@ class MenuLayout extends React.Component {
               <Image size="tiny" src='/assets/images/major-logo-1.png' />
             </Menu.Item>
             <Menu.Item className='navbarItem' onClick={(e) => this.props.history.replace('/')} >
-              <Icon name='home'/>Home
+              <Icon name='home'/>
             </Menu.Item>
             <Dropdown item text="Operation">
               <Dropdown.Menu>
@@ -75,7 +75,9 @@ class MenuLayout extends React.Component {
               </Dropdown.Menu>
             </Dropdown>
             <Menu.Item className='navbarItem' key='support' name='support' active={active === 'support'} onClick={(e) => this.handleClickDepartment('Support')} />
-            <Menu.Item className='navbarItem' key='web board' name='web board' active={active === 'web board'} onClick={this.handleClick} />
+            <Menu.Item className='navbarItem' onClick={(e) => this.props.history.replace('/WebBoard')}>
+              Web Board
+            </Menu.Item>
             {/* <Menu.Item className='navbarItem' key='quiz' name='quiz' active={active === 'quiz'} onClick={this.handleClick} /> */}
             <Menu.Menu position="right">
               <Menu.Item className='navbarItem' key='logout' name='logout' onClick={(e) => this.logout()} />

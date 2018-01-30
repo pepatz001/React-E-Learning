@@ -163,7 +163,7 @@ p , ul , h2{
     font-weight: 400 !important;
 }
 .ui.divider:not(.vertical):not(.horizontal) {
-    border-top: 1px solid #F1B600;
+    border-top: 1px solid #F1B600 !important;
 }
 .ui.visible.right.overlay.sidebar {
     width: 50%;
@@ -211,9 +211,29 @@ p , ul , h2{
 .ui.left.aligned.header {
     color: #FFDFAA !important;
 }
+
 .ui.segment.feedNew {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(28, 28, 35, 0);
+    border: 1.5px solid rgb(241, 182, 0);
 }
+.ui.feed>.event>.content .date {
+    color: rgba(255, 223, 170, 0.6) !important;
+}
+.ui.gold.label, .ui.gold.labels .label {
+    background-color: rgba(28, 28, 35, 0);
+    border: 1px solid rgb(241, 182, 0);
+    color: rgb(241, 182, 0);
+}
+.ui.feed>.event>.content a {
+    color: #FFDFAA !important;
+}
+.ui.feed>.event>.content a:hover {
+    color: rgb(241, 182, 0) !important;
+}
+.ui.feed>.event>.content a:active {
+    color: rgb(241, 182, 0) !important;
+}
+
 .banner {
     margin-top: 15px;
 }

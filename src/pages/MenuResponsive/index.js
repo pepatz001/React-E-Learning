@@ -57,7 +57,7 @@ class MenuResponsive extends React.Component {
             </Accordion>
             </Menu.Item>
             <Menu.Item className='navbarItem' key='support' name='support' onClick={(e) => this.handleClickDepartment('Support')} />
-            <Menu.Item name='web board'>
+            <Menu.Item name='web board' onClick={(e) => this.props.history.replace('/WebBoard')}>
               Web board
             </Menu.Item>
             {/* <Menu.Item name='camera'>
