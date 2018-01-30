@@ -31,7 +31,7 @@ class Main extends React.Component {
               <Divider/>
               <Grid>
                 <Grid.Column width={6}>
-                  <Header as='h2' textAlign='left'>Topic</Header>
+                  <Header as='h2' textAlign='left'>Courses</Header>
                   <Segment className='feedNew'>
                     <Feed>
                       <Feed.Event>
@@ -56,7 +56,7 @@ class Main extends React.Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={10}>
-                  <Header as='h2' textAlign='left'>Web Board</Header>
+                  <Header as='h2' textAlign='left'>Hot Topics</Header>
                   <Segment className='feedNew'>
                     <Feed>
                       <Feed.Event>
@@ -101,7 +101,7 @@ class Main extends React.Component {
                 </div>
               </Carousel>
               <Divider/>
-              <Header as='h2' textAlign='left'>Topic</Header>
+              <Header as='h2' textAlign='left'>Courses</Header>
               <Segment className='feedNew'>
                 <Feed>
                   <Feed.Event>
@@ -124,7 +124,7 @@ class Main extends React.Component {
                 </Feed.Event>
                 </Feed>
               </Segment>
-              <Header as='h2' textAlign='left'>Web Board</Header>
+              <Header as='h2' textAlign='left'>Hot Topics</Header>
               <Segment className='feedNew'>
                 <Feed>
                   <Feed.Event>

@@ -117,6 +117,10 @@
     color: #FFDFAA;
     top: 60px;
 }
+.ui[class*="left aligned"].segment.PC {
+    color: #FFDFAA;
+    top: 0 !important;
+}
 /* ------------------------------------------------ */
 .ui.fixed.menu.footer {
     background: url('/assets/images/Footer.png');

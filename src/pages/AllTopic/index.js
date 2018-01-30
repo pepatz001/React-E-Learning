@@ -99,7 +99,7 @@ class AllTopic extends React.Component {
                             <Segment style={{ margin: '0 10px 0 25px' }} vertical>
                             <Grid>
                                 <Grid.Column stretched width={16}>
-                                <Segment basic textAlign='left'>
+                                <Segment basic textAlign='left' className='PC'>
                                     <h2>{this.state.activeItem}</h2>
                                     <Divider />
                                     <div>
