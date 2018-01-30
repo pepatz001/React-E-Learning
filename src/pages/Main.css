@@ -111,7 +111,7 @@
 .ui[class*="center aligned"].segment {
     background: rgba(28,28,35,0.85) !important;
     color: #FFDFAA;
-    top: 49px;
+    top: 60px;
 }
 .ui[class*="left aligned"].segment {
     color: #FFDFAA;
@@ -120,6 +120,11 @@
 .ui[class*="left aligned"].segment.PC {
     color: #FFDFAA;
     top: 0 !important;
+}
+.ui[class*="left aligned"].segment.webboard {
+    background: rgba(28,28,35,0.85) !important;
+    color: #FFDFAA;
+    top: 60px !important;
 }
 /* ------------------------------------------------ */
 .ui.fixed.menu.footer {
@@ -167,7 +172,10 @@ p , ul , h2{
     font-weight: 400 !important;
 }
 .ui.divider:not(.vertical):not(.horizontal) {
-    border-top: 1px solid #F1B600 !important;
+    border-top: 1px solid rgb(241, 182, 0) !important;
+}
+.ui.divider.default:not(.vertical):not(.horizontal) {
+    border-top: 1px solid rgba(34,36,38,.15) !important;
 }
 .ui.visible.right.overlay.sidebar {
     width: 50%;
@@ -238,6 +246,66 @@ p , ul , h2{
     color: rgb(241, 182, 0) !important;
 }
 
+.ui.segment.topic {
+    background: rgba(28, 28, 35, 0);
+    border: 1.5px solid rgb(241, 182, 0);
+    margin-top: 0px !important;
+}
+
 .banner {
     margin-top: 15px;
+}
+
+.ui.breadcrumb .divider {
+    color: #FFDFAA !important;
+}
+.ui.breadcrumb .active.section {
+    color: rgb(241, 182, 0) !important;
+}
+.ui.breadcrumb a.section {
+    color: #FFDFAA !important;
+}
+
+.ui.table {
+    background: #1b1c1d00 !important;  
+    color: rgb(255, 223, 170) !important;
+    border: 0px solid rgba(34,36,38,.15) !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
+}
+.ui.table.header{
+    margin-bottom: 0px !important;
+}
+.ui.table.topicTable > tBody > th, td {
+    border-bottom: 1px solid rgb(255, 223, 170) !important;
+}
+td.head.headerTable , td.new.headerTable{
+    border-bottom: 0px solid rgb(255, 223, 170) !important;
+}
+td.date {
+    color: rgb(93, 94, 95) !important;
+    width: 50%;
+}
+td.hand > a{
+    cursor: pointer;
+    color: rgb(255, 223, 170) !important;
+    font-weight: 400 !important;
+}
+td.hand > a:hover{
+    cursor: pointer;
+    color: rgb(241, 182, 0) !important;
+    font-weight: 400 !important;
+}
+.ui.mini.button.newTopic {
+    background: rgba(28, 28, 35, 0);
+    border: 1px solid rgb(255, 223, 170);
+    color: rgb(255, 223, 170);
+}
+.ui.mini.button.newTopic:hover {
+    background: rgba(28, 28, 35, 0);
+    border: 1px solid rgb(241, 182, 0);
+    color: rgb(241, 182, 0);
+}
+tr.rowMobile {
+    border-bottom: 1px solid rgb(255, 223, 170) !important;
 }

@@ -5,7 +5,7 @@ import Navbar from '../Navbar'
 // import _ from 'lodash'
 import { getDepartment , getUserDepartment } from '../../api'
 // import CKEditor from 'react-ckeditor-wrapper'
-import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon     } from "semantic-ui-react"
+import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon  , Breadcrumb } from "semantic-ui-react"
 
 class AllTopic extends React.Component {
 
@@ -73,9 +73,15 @@ class AllTopic extends React.Component {
             <MenuResponsive history={this.props.history}/> */}
             <Navbar history={this.props.history}>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-                    <Segment textAlign='center'>
+                    <Segment textAlign='left' className='webboard'>
+                        <Breadcrumb className='breadcrumbLeft'>
+                            <Breadcrumb.Section link onClick={(e) => this.props.history.replace('/')}>Home</Breadcrumb.Section>
+                            <Breadcrumb.Divider icon='right angle' />
+                            <Breadcrumb.Section active>{ localStorage.getItem('departmentClick') == 'Bowling Operation Business Unit' ? 'Bowling' : localStorage.getItem('departmentClick')}</Breadcrumb.Section>
+                        </Breadcrumb>
+                        <Divider className='default'/>
                         <Grid>
-                        <Grid.Column width={3}>
+                        <Grid.Column width={3} textAlign='center'>
                             <Menu inverted vertical className='Layout'>
                             <Container>
                                 { topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
@@ -120,6 +126,12 @@ class AllTopic extends React.Component {
                 </Responsive>
                 <Responsive {...Responsive.onlyMobile}>
                     <Segment basic textAlign='left'>
+                        <Breadcrumb className='breadcrumbLeft'>
+                            <Breadcrumb.Section link onClick={(e) => this.props.history.replace('/')}>Home</Breadcrumb.Section>
+                            <Breadcrumb.Divider icon='right angle' />
+                            <Breadcrumb.Section active>{ localStorage.getItem('departmentClick') == 'Bowling Operation Business Unit' ? 'Bowling' : localStorage.getItem('departmentClick')}</Breadcrumb.Section>
+                        </Breadcrumb>
+                        <Divider className='default'/>
                             { topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
                                 topics.map((item,index) => //Loop
                                     <Accordion>

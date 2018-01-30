@@ -4,7 +4,7 @@ import Navbar from '../Navbar'
 
 import { getUserDepartment } from '../../api'
 // import CKEditor from 'react-ckeditor-wrapper'
-import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon     } from "semantic-ui-react"
+import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon , Header , Breadcrumb , Table , Label , Button } from "semantic-ui-react"
 
 class WebBoard extends React.Component {
 
@@ -30,9 +30,55 @@ class WebBoard extends React.Component {
             <MenuResponsive history={this.props.history}/> */}
             <Navbar history={this.props.history}>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-                    <Segment textAlign='center'>
-                        <Segment className='feedNew'>
-
+                    <Segment textAlign='left' className='webboard'>
+                        <Breadcrumb>
+                            <Breadcrumb.Section link onClick={(e) => this.props.history.replace('/')}>Home</Breadcrumb.Section>
+                            <Breadcrumb.Divider icon='right angle' />
+                            <Breadcrumb.Section active>Web Board</Breadcrumb.Section>
+                        </Breadcrumb>
+                        <Divider className='default'/>
+                        <Table className='header'>
+                            <Table.Body>
+                                <Table.Row>
+                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>Hot Topics</Header></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                        </Table>
+                        <Segment className='topic'>
+                            <Table>
+                                <Table.Body>
+                                    <Table.Row>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table>
+                        </Segment>
+                        <Table className='header'>
+                            <Table.Body>
+                                <Table.Row>
+                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>All Topics</Header></Table.Cell>
+                                    <Table.Cell textAlign='right' className='new headerTable'><Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                        </Table>
+                        <Segment className='topic'>
+                            <Table className='topicTable'>
+                                <Table.Body>
+                                    <Table.Row>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table>
                         </Segment>
                         <Image src='/assets/images/partner.png' size='large' centered/>
                         <Container textAlign='center'>
@@ -43,7 +89,55 @@ class WebBoard extends React.Component {
                 </Responsive>
                 <Responsive {...Responsive.onlyMobile}>
                     <Segment basic textAlign='left'>
-
+                        <Breadcrumb>
+                            <Breadcrumb.Section link onClick={(e) => this.props.history.replace('/')}>Home</Breadcrumb.Section>
+                            <Breadcrumb.Divider icon='right angle' />
+                            <Breadcrumb.Section active>Web Board</Breadcrumb.Section>
+                        </Breadcrumb>
+                        <Divider className='default'/>
+                        <Table className='header'>
+                            <Table.Body>
+                                <Table.Row>
+                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>Hot Topics</Header></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                        </Table>
+                        <Segment className='topic'>
+                            <Table>
+                                <Table.Body>
+                                    <Table.Row className='rowMobile'>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row className='rowMobile'>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table>
+                        </Segment>
+                        <Table className='header'>
+                            <Table.Body>
+                                <Table.Row>
+                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>All Topics</Header></Table.Cell>
+                                    <Table.Cell textAlign='right' className='new headerTable'><Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button></Table.Cell>
+                                </Table.Row>
+                            </Table.Body>
+                        </Table>
+                        <Segment className='topic'>
+                            <Table className='topicTable'>
+                                <Table.Body>
+                                    <Table.Row className='rowMobile'>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                    <Table.Row className='rowMobile'>
+                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
+                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
+                                    </Table.Row>
+                                </Table.Body>
+                            </Table>
+                        </Segment>
                     </Segment>
                     <Image src='/assets/images/partner.png' size='large' centered/>
                     <Container textAlign='center'>

@@ -114,14 +114,14 @@ class Main extends React.Component {
                     </Feed.Content>
                   </Feed.Event>
                   <Feed.Event>
-                  <Feed.Content>
-                    <Feed.Date>3 days ago</Feed.Date>
-                    <Feed.Summary>
-                      <Label className='gold' horizontal>New!</Label>
-                      <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
-                    </Feed.Summary>
-                  </Feed.Content>
-                </Feed.Event>
+                    <Feed.Content>
+                      <Feed.Date>3 days ago</Feed.Date>
+                      <Feed.Summary>
+                        <Label className='gold' horizontal>New!</Label>
+                        <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
                 </Feed>
               </Segment>
               <Header as='h2' textAlign='left'>Hot Topics</Header>
