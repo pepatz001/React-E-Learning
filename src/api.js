@@ -99,3 +99,14 @@ export const deleteContent = (data) => {
     .then(data => data)
     .catch(error => error.response)
 }
+
+export const createTopic = (data) => {
+  return axiosInstance.post('/api/topic/create', data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+export const getTopic = () => {
+  return axiosInstance.get('/api/topic/all')
+    .then(response => response.data)
+    .catch(error => { throw(error.response) })
+}

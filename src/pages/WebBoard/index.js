@@ -3,10 +3,18 @@ import localStorage from 'localStorage'
 import Navbar from '../Navbar'
 
 import { getUserDepartment } from '../../api'
-// import CKEditor from 'react-ckeditor-wrapper'
-import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon , Header , Breadcrumb , Table , Label , Button } from "semantic-ui-react"
+import CKEditor from 'react-ckeditor-wrapper'
+import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon , Header , Breadcrumb , Table , Label , Button , Modal , Form } from "semantic-ui-react"
 
 class WebBoard extends React.Component {
+
+    state = {
+        errorName: false,
+        nameModal: '',
+        code: ''
+    }
+
+    handleChangeModal = (e, { name, value }) => this.setState({ [name]: value })
 
     mapUser = (list) => {
         const item = list.filter(item => item.username === localStorage.username).map(item => item.department)
@@ -15,6 +23,10 @@ class WebBoard extends React.Component {
         if(this.state.department === 'admin'){
           this.props.history.replace('/admin')
         }
+    }
+
+    updateContent(value) {
+        this.setState({code:value})
     }
     
     componentWillMount() { 
@@ -37,13 +49,9 @@ class WebBoard extends React.Component {
                             <Breadcrumb.Section active>Web Board</Breadcrumb.Section>
                         </Breadcrumb>
                         <Divider className='default'/>
-                        <Table className='header'>
-                            <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>Hot Topics</Header></Table.Cell>
-                                </Table.Row>
-                            </Table.Body>
-                        </Table>
+                        <Menu text>
+                            <Menu.Item><Header as='h2' textAlign='left'>Hot Topics</Header></Menu.Item>
+                        </Menu>
                         <Segment className='topic'>
                             <Table>
                                 <Table.Body>
@@ -58,14 +66,30 @@ class WebBoard extends React.Component {
                                 </Table.Body>
                             </Table>
                         </Segment>
-                        <Table className='header'>
-                            <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>All Topics</Header></Table.Cell>
-                                    <Table.Cell textAlign='right' className='new headerTable'><Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button></Table.Cell>
-                                </Table.Row>
-                            </Table.Body>
-                        </Table>
+                        <br/>
+                        <Menu text>
+                            <Menu.Item><Header as='h2' textAlign='left'>All Topics</Header></Menu.Item>
+                            <Menu.Item position='right'>
+                                <Modal basic className="newTopic" trigger={<Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button>}>
+                                    <Modal.Header>New Topic</Modal.Header>
+                                    <Modal.Content >
+                                        <Modal.Description>
+                                            <Form>
+                                                <Form.Field required>
+                                                    <label className='notAdmin'>Name</label>
+                                                    <Form.Input name='nameModal' className='newTopic' error={this.state.errorName} value={this.state.nameModal} onChange={this.handleChangeModal} placeholder='Name' />
+                                                </Form.Field>
+                                                <Form.Field>
+                                                    <label className='notAdmin'>Descriptions</label>
+                                                    <CKEditor value={this.state.code} onChange={this.updateContent.bind(this)} config={{readOnly: false}}/>
+                                                </Form.Field>
+                                                <Form.Button className='notAdmin' content='Submit' />
+                                            </Form>
+                                        </Modal.Description>
+                                    </Modal.Content>
+                                </Modal>
+                            </Menu.Item>
+                        </Menu>
                         <Segment className='topic'>
                             <Table className='topicTable'>
                                 <Table.Body>
@@ -95,13 +119,9 @@ class WebBoard extends React.Component {
                             <Breadcrumb.Section active>Web Board</Breadcrumb.Section>
                         </Breadcrumb>
                         <Divider className='default'/>
-                        <Table className='header'>
-                            <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>Hot Topics</Header></Table.Cell>
-                                </Table.Row>
-                            </Table.Body>
-                        </Table>
+                        <Menu text>
+                            <Menu.Item><Header as='h2' textAlign='left'>Hot Topics</Header></Menu.Item>
+                        </Menu>
                         <Segment className='topic'>
                             <Table>
                                 <Table.Body>
@@ -116,14 +136,26 @@ class WebBoard extends React.Component {
                                 </Table.Body>
                             </Table>
                         </Segment>
-                        <Table className='header'>
-                            <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell className='head headerTable'><Header as='h2' textAlign='left'>All Topics</Header></Table.Cell>
-                                    <Table.Cell textAlign='right' className='new headerTable'><Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button></Table.Cell>
-                                </Table.Row>
-                            </Table.Body>
-                        </Table>
+                        <br/>
+                        <Menu text>
+                            <Menu.Item><Header as='h2' textAlign='left'>All Topics</Header></Menu.Item>
+                            <Menu.Item position='right'>
+                                <Modal basic className="newTopic" trigger={<Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button>}>
+                                    <Modal.Header>New Topic</Modal.Header>
+                                    <Modal.Content >
+                                        <Modal.Description>
+                                            <Form>
+                                                <Form.Field required>
+                                                    <label className='notAdmin'>First Name</label>
+                                                    <Form.Input name='firstNameModal' className='newTopic' error={this.state.errorFirstName} value={this.state.firstNameModal} onChange={this.handleChangeModal} placeholder='First Name' />
+                                                </Form.Field>
+                                                <Form.Button content='Submit' />
+                                            </Form>
+                                        </Modal.Description>
+                                    </Modal.Content>
+                                </Modal>
+                            </Menu.Item>
+                        </Menu>
                         <Segment className='topic'>
                             <Table className='topicTable'>
                                 <Table.Body>

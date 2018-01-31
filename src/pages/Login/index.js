@@ -40,16 +40,17 @@ class Login extends React.Component {
   render() {
     return (
         <div class="ui container basic segment">
-            <div class="ui form segment grid">
+            <div class="ui form segment grid login">
                 <div className='column center aligned'>
-                    <h2 className='ui teal header'>Login</h2>
+                    <h2 className='ui teal header login'>Login</h2>
                     <form className='ui large form' onSubmit={this.onSubmit}>
-                        <div className='ui stacked segment'>
+                        <div className='ui stacked segment basic'>
                         
                             <div className='field'>
                                 <div className='ui left icon input'>
                                 <i className='user icon' />
                                 <input 
+                                    className='login'
                                     type='text' 
                                     name='username' 
                                     placeholder='Username' 
@@ -62,6 +63,7 @@ class Login extends React.Component {
                                 <div className='ui left icon input'>
                                 <i className='lock icon' />
                                 <input 
+                                    className='login'
                                     type='password' 
                                     name='password' 
                                     placeholder='Password' 
@@ -72,7 +74,7 @@ class Login extends React.Component {
 
                             <div className='field'>
                                 <div className='ui left icon input'>
-                                <button type='submit' className='ui teal fluid button'>
+                                <button type='submit' className='ui teal fluid button notAdmin'>
                                     Log in
                                 </button>
                                 </div>
