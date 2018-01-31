@@ -8,6 +8,7 @@ import Crpdaz from './pages/Crpdaz'
 import Default from './pages/Default'
 import AllTopic from './pages/AllTopic'
 import WebBoard from './pages/WebBoard'
+import Topic from './pages/Topic'
 
 const Routes = () => {
     return (
@@ -20,6 +21,7 @@ const Routes = () => {
                 <Route exact path="/" component={Main} />
                 <Route exact path="/AllTopic" component={AllTopic} />
                 <Route exact path="/WebBoard" component={WebBoard} />
+                <Route exact path="/WebBoard/Topic" component={Topic} />
                 <Route exact path="/Crpdaz" component={Crpdaz} />
                 {localStorage.getItem('department') !== 'admin' ? (
                 <Redirect to="/" />

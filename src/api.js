@@ -110,6 +110,11 @@ export const getTopic = () => {
     .then(response => response.data)
     .catch(error => { throw(error.response) })
 }
+export const getOneTopic = (_id) => {
+  return axiosInstance.get('/api/topic/' + _id)
+    .then(response => response.data)
+    .catch(error => { throw(error.response) })
+}
 export const comment = (_id,data) => {
   return axiosInstance.put('/api/topic/reply/' + _id,data)
     .then(data => data)

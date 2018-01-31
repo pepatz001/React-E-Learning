@@ -19,6 +19,12 @@ class Crpdaz extends React.Component {
     localStorage.setItem('department', this.state.department)
     if(this.state.department === 'admin'){
       this.props.history.replace('/admin')
+    } else if(localStorage.getItem('path') === 'WebBoard') {
+      localStorage.setItem('path','')
+      this.props.history.replace('/WebBoard')
+    } else if(localStorage.getItem('path') === 'Topic') {
+      localStorage.setItem('path','')
+      this.props.history.replace('/WebBoard/Topic')
     } else {
       this.props.history.replace('/AllTopic')
     }

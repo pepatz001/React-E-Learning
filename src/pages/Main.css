@@ -371,3 +371,24 @@ tr.rowMobile {
 .ui.teal.header.login {
     color: rgb(241, 182, 0) !important;
 }
+.ui[class*="left aligned"].segment.topic {
+    top: 0;
+}
+.white {
+    color: white !important;
+}
+.ui.comments .comment a.author.notAdmin {
+    color: rgb(241, 182, 0)
+}
+.ui.comments .comment .metadata.notAdmin {
+    color: rgba(255, 223, 170, 0.8);
+}
+.ui.comments .comment .text.notAdmin {
+    color: white;
+}
+.ui.comments {
+    max-width: 100% !important;
+}
+div.commentBox {
+    max-height: 50px !important;
+}

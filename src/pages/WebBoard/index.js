@@ -2,19 +2,26 @@ import React from 'react'
 import localStorage from 'localStorage'
 import Navbar from '../Navbar'
 
-import { getUserDepartment } from '../../api'
+import { getUserDepartment , getTopic , createTopic } from '../../api'
 import CKEditor from 'react-ckeditor-wrapper'
 import { Divider , Container , Menu , Segment, Grid , Responsive , Image , Accordion , Icon , Header , Breadcrumb , Table , Label , Button , Modal , Form } from "semantic-ui-react"
+
+var dateFormat = require('dateformat')
 
 class WebBoard extends React.Component {
 
     state = {
         errorName: false,
         nameModal: '',
-        code: ''
+        code: '',
+        allTopics: []
     }
 
     handleChangeModal = (e, { name, value }) => this.setState({ [name]: value })
+    
+    setTopic = (topic) => {
+        this.setState({allTopics: topic})
+    }
 
     mapUser = (list) => {
         const item = list.filter(item => item.username === localStorage.username).map(item => item.department)
@@ -22,6 +29,10 @@ class WebBoard extends React.Component {
         localStorage.setItem('department', this.state.department)
         if(this.state.department === 'admin'){
           this.props.history.replace('/admin')
+        } else {
+            getTopic()
+            .then(topic => this.setTopic(topic))
+            .catch(err => console.error('Something went wrong.'))
         }
     }
 
@@ -34,12 +45,39 @@ class WebBoard extends React.Component {
         .then(user => this.mapUser(user))
         .catch(err => console.error('Something went wrong.'))
     }
+
+    handleSubmit = event => {
+        event.preventDefault() //no refresh
+        if(this.state.nameModal === ''){
+            this.setState({ errorName: true })
+        } else {
+            this.setState({ errorName: false })
+            const data = {
+                topicName: this.state.nameModal,
+                description: this.state.code,
+                owner: localStorage.getItem('username')
+            }
+            console.log(data)
+            createTopic(data)
+            .then(data => {
+                if (data.status === 200) {
+                    localStorage.setItem('path','WebBoard')
+                    this.props.history.replace('/Crpdaz')
+                }
+            })
+        }
+        
+    }
+
+    showTopic = (id) => {
+        localStorage.setItem('idTopic',id)
+        this.props.history.replace('/WebBoard/Topic')
+    }
     
     render() {
+        const topics = this.state.allTopics
         return (
         <div className='body'>
-            {/* <MenuLayout history={this.props.history}/>
-            <MenuResponsive history={this.props.history}/> */}
             <Navbar history={this.props.history}>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
                     <Segment textAlign='left' className='webboard'>
@@ -55,14 +93,14 @@ class WebBoard extends React.Component {
                         <Segment className='topic'>
                             <Table>
                                 <Table.Body>
-                                    <Table.Row>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
-                                    <Table.Row>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
+                                    {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        topics.map(item => //Loop
+                                        <Table.Row>
+                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                        </Table.Row>
+                                        )
+                                        : null}
                                 </Table.Body>
                             </Table>
                         </Segment>
@@ -74,7 +112,7 @@ class WebBoard extends React.Component {
                                     <Modal.Header>New Topic</Modal.Header>
                                     <Modal.Content >
                                         <Modal.Description>
-                                            <Form>
+                                            <Form onSubmit={this.handleSubmit}>
                                                 <Form.Field required>
                                                     <label className='notAdmin'>Name</label>
                                                     <Form.Input name='nameModal' className='newTopic' error={this.state.errorName} value={this.state.nameModal} onChange={this.handleChangeModal} placeholder='Name' />
@@ -93,14 +131,14 @@ class WebBoard extends React.Component {
                         <Segment className='topic'>
                             <Table className='topicTable'>
                                 <Table.Body>
-                                    <Table.Row>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
-                                    <Table.Row>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
+                                    {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        topics.map(item => //Loop
+                                        <Table.Row>
+                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                        </Table.Row>
+                                        )
+                                        : null}
                                 </Table.Body>
                             </Table>
                         </Segment>
@@ -125,14 +163,14 @@ class WebBoard extends React.Component {
                         <Segment className='topic'>
                             <Table>
                                 <Table.Body>
-                                    <Table.Row className='rowMobile'>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
-                                    <Table.Row className='rowMobile'>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
+                                    {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        topics.map(item => //Loop
+                                        <Table.Row>
+                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                        </Table.Row>
+                                        )
+                                        : null}
                                 </Table.Body>
                             </Table>
                         </Segment>
@@ -144,12 +182,16 @@ class WebBoard extends React.Component {
                                     <Modal.Header>New Topic</Modal.Header>
                                     <Modal.Content >
                                         <Modal.Description>
-                                            <Form>
+                                            <Form onSubmit={this.handleSubmit}>
                                                 <Form.Field required>
-                                                    <label className='notAdmin'>First Name</label>
-                                                    <Form.Input name='firstNameModal' className='newTopic' error={this.state.errorFirstName} value={this.state.firstNameModal} onChange={this.handleChangeModal} placeholder='First Name' />
+                                                    <label className='notAdmin'>Name</label>
+                                                    <Form.Input name='nameModal' className='newTopic' error={this.state.errorName} value={this.state.nameModal} onChange={this.handleChangeModal} placeholder='Name' />
                                                 </Form.Field>
-                                                <Form.Button content='Submit' />
+                                                <Form.Field>
+                                                    <label className='notAdmin'>Descriptions</label>
+                                                    <CKEditor value={this.state.code} onChange={this.updateContent.bind(this)} config={{readOnly: false}}/>
+                                                </Form.Field>
+                                                <Form.Button className='notAdmin' content='Submit' />
                                             </Form>
                                         </Modal.Description>
                                     </Modal.Content>
@@ -159,14 +201,14 @@ class WebBoard extends React.Component {
                         <Segment className='topic'>
                             <Table className='topicTable'>
                                 <Table.Body>
-                                    <Table.Row className='rowMobile'>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
-                                    <Table.Row className='rowMobile'>
-                                        <Table.Cell className='hand'><a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a></Table.Cell>
-                                        <Table.Cell textAlign='right' className='date'>31 Jan 2018</Table.Cell>
-                                    </Table.Row>
+                                    {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        topics.map(item => //Loop
+                                        <Table.Row>
+                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                        </Table.Row>
+                                        )
+                                        : null}
                                 </Table.Body>
                             </Table>
                         </Segment>
