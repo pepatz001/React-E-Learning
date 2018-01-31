@@ -110,3 +110,13 @@ export const getTopic = () => {
     .then(response => response.data)
     .catch(error => { throw(error.response) })
 }
+export const comment = (_id,data) => {
+  return axiosInstance.put('/api/topic/reply/' + _id,data)
+    .then(data => data)
+    .catch(error => error.response)
+}
+export const deleteComment = (_id,data) => {
+  return axiosInstance.put('/api/topic/delete/' + _id,data)
+    .then(data => data)
+    .catch(error => error.response)
+}

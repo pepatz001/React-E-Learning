@@ -28,6 +28,11 @@ class MenuResponsive extends React.Component {
     this.props.history.replace('/Crpdaz') //redirect
   }
 
+  logout = () => {
+    this.props.history.replace('/login') //redirect
+    localStorage.clear()
+  }
+
   render(){
     const { visible , activeIndex } = this.state
 
@@ -59,6 +64,9 @@ class MenuResponsive extends React.Component {
             <Menu.Item className='navbarItem' key='support' name='support' onClick={(e) => this.handleClickDepartment('Support')} />
             <Menu.Item name='web board' onClick={(e) => this.props.history.replace('/WebBoard')}>
               Web board
+            </Menu.Item>
+            <Menu.Item name='home' onClick={(e) => this.logout()}>
+              Logout
             </Menu.Item>
             {/* <Menu.Item name='camera'>
               Quiz

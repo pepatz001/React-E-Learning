@@ -1,7 +1,19 @@
 import React from 'react';
-import { getTopic , updateDepartment , deleteDepartment , updateContent , deleteContent , createTopic } from '../../api'
-import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Header } from 'semantic-ui-react'
+import { getTopic , updateDepartment , deleteDepartment , updateContent , deleteContent , createTopic , comment , deleteComment } from '../../api'
+import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Header , Comment } from 'semantic-ui-react'
 import CKEditor from 'react-ckeditor-wrapper';
+import TimeAgo from 'javascript-time-ago'
+
+// Load locale-specific relative date/time formatting rules.
+import en from 'javascript-time-ago/locale/en'
+
+// Add locale-specific relative date/time formatting rules.
+TimeAgo.locale(en)
+
+// Create relative date/time formatter.
+const timeAgo = new TimeAgo('en-US')
+
+var dateFormat = require('dateformat')
 
 class WebBoardAdmin extends React.Component {
     state = { 
@@ -12,7 +24,9 @@ class WebBoardAdmin extends React.Component {
         open: false,
         nameModal: "",
         errorName: false,
-        allTopics: []
+        allTopics: [],
+        codeComment: '',
+        thisId: ''
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -80,6 +94,18 @@ class WebBoardAdmin extends React.Component {
         })
     }
 
+    handleSubmitComment = event => {
+        event.preventDefault() //no refresh
+        const data = {
+            reply: localStorage.getItem('username'),
+            description: this.state.codeComment
+        }
+        const id = this.state.thisId
+        console.log(id,data)
+        comment(id,data)
+        .then(this.props.history.replace('/Crpdaz'))
+    }
+
     handleSubmit = event => {
         event.preventDefault() //no refresh
         if(this.state.nameModal === ''){
@@ -111,8 +137,8 @@ class WebBoardAdmin extends React.Component {
         this.setState({code: value})
     }
 
-    updateContentNew(value) {
-        this.setState({code: value})
+    updateContentComment(value) {
+        this.setState({codeComment: value})
     }
 
     saveContent = (content, code,_id) => {
@@ -149,6 +175,18 @@ class WebBoardAdmin extends React.Component {
         .catch(err => console.error('Something went wrong.'))
     }
 
+    delete = (idTopic,_id,data) => {
+        const offer = []
+        data.forEach( v => v._id !== _id ? offer.push(v) : null)
+        // console.log(offer)
+        const dataNew = {
+            offer: offer
+        }
+        deleteComment(idTopic,dataNew)
+        .then(this.props.history.replace('/Crpdaz'))
+        .catch(err => console.error('Something went wrong.'))
+    }
+
     close = () => this.setState({ open: false })
 
     render() {
@@ -164,11 +202,45 @@ class WebBoardAdmin extends React.Component {
                             <List.Item>
                                 <List.Content>
                                     <List.Header>
-                                        <Modal size='fullscreen' trigger={<a>{item.topicName}</a>}>
+                                        <Modal trigger={<a>{item.topicName}</a>} onClick={(e) => this.setState({thisId: item._id})}>
                                             <Modal.Content >
                                                 <Modal.Description>
                                                 <Header as='h2' textAlign='left' className='admin'>{item.topicName}</Header>
-                                                <p>โดย {item.owner} | {item.created}</p>
+                                                <p>โดย {item.owner} | {dateFormat(item.created,'longDate')}</p>
+                                                <div>
+                                                    <div dangerouslySetInnerHTML={{ __html: item.description}}></div>
+                                                </div>
+                                                {/* {timeAgo.format(new Date())}   เช็คเวลา */}
+                                                <Comment.Group>
+                                                    <Header as='h3' dividing>Comments</Header>
+                                                    {
+                                                        item.offer.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                                        item.offer.map(itemOffer => //Loop
+                                                            <Comment>
+                                                                <Comment.Content>
+                                                                    <Comment.Author as='a'>{itemOffer.offerusername}</Comment.Author>
+                                                                    <Comment.Metadata>
+                                                                    <div>{timeAgo.format(new Date(itemOffer.created))}</div>
+                                                                    </Comment.Metadata>
+                                                                    <Comment.Text>
+                                                                        <div>
+                                                                            <div dangerouslySetInnerHTML={{ __html: itemOffer.offerdescription}}></div>
+                                                                        </div>
+                                                                    </Comment.Text>
+                                                                    <Comment.Actions>
+                                                                        <Comment.Action onClick={(e) => this.delete(item._id,itemOffer._id,item.offer)}>Delete Comment</Comment.Action>
+                                                                    </Comment.Actions>
+                                                                </Comment.Content>
+                                                            </Comment>
+                                                        )
+                                                        : null
+                                                    }
+
+                                                    <Form reply onSubmit={this.handleSubmitComment}>
+                                                        <CKEditor value={this.state.codeComment} onChange={this.updateContentComment.bind(this)} config={{readOnly: false}}/><br/>
+                                                        <Button content='Post' labelPosition='left' icon='edit' primary />
+                                                    </Form>
+                                                </Comment.Group>
                                                 </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
