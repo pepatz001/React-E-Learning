@@ -32,7 +32,7 @@ class Main extends React.Component {
   setCourse = (data) => {
     // console.log(data)
     const courseUpdate = data.filter(item => item.update === '1')
-    const courseNew = data.sort((a, b) => new Date(dateFormat(a.created,'yyyy-mm-dd').split('/').reverse()) - new Date(dateFormat(b.created,'yyyy-mm-dd').split('/').reverse())).reverse().slice(0, 3)
+    const courseNew = data.filter(item => item.update === '0').sort((a, b) => new Date(dateFormat(a.created,'yyyy-mm-dd').split('/').reverse()) - new Date(dateFormat(b.created,'yyyy-mm-dd').split('/').reverse())).reverse().slice(0, 3)
     this.setState({
       courseUpdate: courseUpdate,
       courseNew: courseNew
@@ -120,7 +120,7 @@ class Main extends React.Component {
                               <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
                               <Feed.Summary>
                                 <Label className='gold' horizontal>New!</Label>
-                                <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                                <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.name == 'Bowling Operation Business Unit' ? 'Bowling' : item.name} - {item.content.name}</a>
                               </Feed.Summary><br/>
                             </Feed.Content>
                           </Feed.Event>
@@ -133,7 +133,7 @@ class Main extends React.Component {
                               <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
                               <Feed.Summary>
                                 <Label className='gold' horizontal>Update!</Label>
-                                <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                                <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.name == 'Bowling Operation Business Unit' ? 'Bowling' : item.name} - {item.content.name}</a>
                               </Feed.Summary><br/>
                             </Feed.Content>
                           </Feed.Event>
@@ -192,7 +192,7 @@ class Main extends React.Component {
                           <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
                           <Feed.Summary>
                             <Label className='gold' horizontal>New!</Label>
-                            <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                            <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.name == 'Bowling Operation Business Unit' ? 'Bowling' : item.name} - {item.content.name}</a>
                           </Feed.Summary><br/>
                         </Feed.Content>
                       </Feed.Event>
@@ -205,7 +205,7 @@ class Main extends React.Component {
                           <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
                           <Feed.Summary>
                             <Label className='gold' horizontal>Update!</Label>
-                            <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                            <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.name == 'Bowling Operation Business Unit' ? 'Bowling' : item.name} - {item.content.name}</a>
                           </Feed.Summary><br/>
                         </Feed.Content>
                       </Feed.Event>
