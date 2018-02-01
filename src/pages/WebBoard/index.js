@@ -14,13 +14,25 @@ class WebBoard extends React.Component {
         errorName: false,
         nameModal: '',
         code: '',
-        allTopics: []
+        allTopics: [],
+        hotTopic: []
     }
 
     handleChangeModal = (e, { name, value }) => this.setState({ [name]: value })
     
     setTopic = (topic) => {
         this.setState({allTopics: topic})
+        const allTopic = topic
+        const count = []
+        allTopic.forEach( v => count.push({
+            _id: v._id,
+            offerLength: v.offer.length,
+            topicName: v.topicName,
+            created: v.created
+        }))
+        const myData = count.sort((a, b) => a.offerLength - b.offerLength).reverse().slice(0, 5)
+        this.setState({hotTopic: myData})
+        console.log(myData)
     }
 
     mapUser = (list) => {
@@ -76,6 +88,7 @@ class WebBoard extends React.Component {
     
     render() {
         const topics = this.state.allTopics
+        const hotTopics = this.state.hotTopic
         return (
         <div className='body'>
             <Navbar history={this.props.history}>
@@ -93,11 +106,11 @@ class WebBoard extends React.Component {
                         <Segment className='topic'>
                             <Table>
                                 <Table.Body>
-                                    {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
-                                        topics.map(item => //Loop
+                                    {hotTopics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        hotTopics.map(item => //Loop
                                         <Table.Row>
-                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
-                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                            <Table.Cell width='12' className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell width='4' textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
                                         </Table.Row>
                                         )
                                         : null}
@@ -108,7 +121,7 @@ class WebBoard extends React.Component {
                         <Menu text>
                             <Menu.Item><Header as='h2' textAlign='left'>All Topics</Header></Menu.Item>
                             <Menu.Item position='right'>
-                                <Modal basic className="newTopic" trigger={<Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button>}>
+                                <Modal closeIcon basic className="newTopic" trigger={<Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button>}>
                                     <Modal.Header>New Topic</Modal.Header>
                                     <Modal.Content >
                                         <Modal.Description>
@@ -134,8 +147,8 @@ class WebBoard extends React.Component {
                                     {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
                                         topics.map(item => //Loop
                                         <Table.Row>
-                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
-                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                            <Table.Cell width='12' className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell width='4' textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
                                         </Table.Row>
                                         )
                                         : null}
@@ -163,11 +176,11 @@ class WebBoard extends React.Component {
                         <Segment className='topic'>
                             <Table>
                                 <Table.Body>
-                                    {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
-                                        topics.map(item => //Loop
+                                    {hotTopics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                                        hotTopics.map(item => //Loop
                                         <Table.Row>
-                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
-                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                            <Table.Cell width='12' className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell width='4' textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
                                         </Table.Row>
                                         )
                                         : null}
@@ -178,7 +191,7 @@ class WebBoard extends React.Component {
                         <Menu text>
                             <Menu.Item><Header as='h2' textAlign='left'>All Topics</Header></Menu.Item>
                             <Menu.Item position='right'>
-                                <Modal basic className="newTopic" trigger={<Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button>}>
+                                <Modal closeIcon basic className="newTopic" trigger={<Button size='mini' className='newTopic'><Icon name='plus' /> New Topic</Button>}>
                                     <Modal.Header>New Topic</Modal.Header>
                                     <Modal.Content >
                                         <Modal.Description>
@@ -204,8 +217,8 @@ class WebBoard extends React.Component {
                                     {topics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
                                         topics.map(item => //Loop
                                         <Table.Row>
-                                            <Table.Cell className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
-                                            <Table.Cell textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
+                                            <Table.Cell width='12' className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                                            <Table.Cell width='4' textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
                                         </Table.Row>
                                         )
                                         : null}

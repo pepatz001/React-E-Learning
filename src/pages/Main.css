@@ -235,6 +235,8 @@ p , ul , h2{
 }
 .ui.feed>.event>.content .date {
     color: rgba(255, 223, 170, 0.6) !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
 .ui.gold.label, .ui.gold.labels .label {
     background-color: rgba(28, 28, 35, 0);
@@ -243,12 +245,18 @@ p , ul , h2{
 }
 .ui.feed>.event>.content a {
     color: #FFDFAA !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
 .ui.feed>.event>.content a:hover {
     color: rgb(241, 182, 0) !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
 .ui.feed>.event>.content a:active {
     color: rgb(241, 182, 0) !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
 
 .ui.segment.topic {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTopic , updateDepartment , deleteDepartment , updateContent , deleteContent , createTopic , comment , deleteComment } from '../../api'
+import { getTopic  , deleteTopic , createTopic , comment , deleteComment } from '../../api'
 import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Header , Comment } from 'semantic-ui-react'
 import CKEditor from 'react-ckeditor-wrapper';
 import TimeAgo from 'javascript-time-ago'
@@ -18,9 +18,6 @@ var dateFormat = require('dateformat')
 class WebBoardAdmin extends React.Component {
     state = { 
         code: "",
-        options: [],
-        activeIndex: -1,
-        visible: false,
         open: false,
         nameModal: "",
         errorName: false,
@@ -28,8 +25,6 @@ class WebBoardAdmin extends React.Component {
         codeComment: '',
         thisId: ''
     }
-
-    toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
@@ -45,53 +40,16 @@ class WebBoardAdmin extends React.Component {
         .catch(err => console.error('Something went wrong.'))
     }
 
-    setDepartment = (data) => {
-        this.setState({
-            department: data,
-            departmentModal: data
-        })
-    }
-
-    setDeleteDepartment = (data) => {
-        this.setState({
-            departmentDelete: data,
-            open: true
-        })
-    }
-
-    deleteDepartment = (data) => {
+    deleteTopic = (id) => {
         // console.log(data)
-        deleteDepartment(data)
+        deleteTopic(id)
         .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
-    }
-
-    editDepartment = () => {
-        if(this.state.departmentModal === ''){
-            this.setState({ errorDepartment: true })
-        } else {
-            this.setState({ errorDepartment: false })
-            console.log(this.state)
-            const data = {
-                name: this.state.departmentModal,
-                oldname: this.state.department
-            }
-            console.log(data)
-            updateDepartment(data)
-            .then(this.props.history.replace('/Crpdaz'))
-            .catch(err => console.error('Something went wrong.'))
-        }
     }
 
     //updateContent CKeditor
     updateContent(value) {
         this.setState({code:value})
-    }
-
-    handleAddition = (e, { value }) => {
-        this.setState({
-          options: [{ text: value, value }, ...this.state.options],
-        })
     }
 
     handleSubmitComment = event => {
@@ -128,10 +86,6 @@ class WebBoardAdmin extends React.Component {
         
     }
 
-    setOptions = (data) => {
-        this.setState({options: data})
-    }
-
     //updateContent CKeditor
     updateContent(value) {
         this.setState({code: value})
@@ -139,40 +93,6 @@ class WebBoardAdmin extends React.Component {
 
     updateContentComment(value) {
         this.setState({codeComment: value})
-    }
-
-    saveContent = (content, code,_id) => {
-        if(this.state.topicName === ''){
-            this.setState({ errorTopic: true })
-        } else {
-            this.setState({ errorTopic: false })
-        }
-        if(this.state.contentName === ''){
-            this.setState({ errorContent: true })
-        } else {
-            this.setState({ errorContent: false })
-        }
-        if(this.state.topicName !== '' && this.state.contentName !== ''){
-            const thisContent = {
-                topic: this.state.topicName,
-                name: this.state.contentName,
-                code: code
-            }
-            const data = {
-                id: _id,
-                content: thisContent
-            }
-            console.log(data)
-            updateContent(data)
-            .then(this.props.history.replace('/Crpdaz'))
-            .catch(err => console.error('Something went wrong.'))
-        }
-    }
-
-    deleteContent = (_id) => {
-        deleteContent(_id)
-        .then(this.props.history.replace('/Crpdaz'))
-        .catch(err => console.error('Something went wrong.'))
     }
 
     delete = (idTopic,_id,data) => {
@@ -190,7 +110,6 @@ class WebBoardAdmin extends React.Component {
     close = () => this.setState({ open: false })
 
     render() {
-        const { activeIndex } = this.state
         const topics = this.state.allTopics
         const panes = [
             { menuItem: { content: 'All Topics' , icon: "suitcase" }, 
@@ -202,7 +121,7 @@ class WebBoardAdmin extends React.Component {
                             <List.Item>
                                 <List.Content>
                                     <List.Header>
-                                        <Modal trigger={<a>{item.topicName}</a>} onClick={(e) => this.setState({thisId: item._id})}>
+                                        <Modal trigger={<a>{item.topicName}</a>} onClick={(e) => this.setState({thisId: item._id})} closeIcon>
                                             <Modal.Content >
                                                 <Modal.Description>
                                                 <Header as='h2' textAlign='left' className='admin'>{item.topicName}</Header>
@@ -246,7 +165,7 @@ class WebBoardAdmin extends React.Component {
                                         </Modal>
                                     </List.Header>
                                     <List.Content floated='right'>
-                                        {/* <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteDepartment(item)}/>} open={this.state.open}>
+                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open} closeIcon>
                                             <Modal.Header>
                                                 Delete this Topic
                                             </Modal.Header>
@@ -255,9 +174,9 @@ class WebBoardAdmin extends React.Component {
                                             </Modal.Content>
                                             <Modal.Actions>
                                                 <Button negative onClick={this.close}>No</Button>
-                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteDepartment(this.state.departmentDelete)}/>
+                                                <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={(e) => this.deleteTopic(item._id)}/>
                                             </Modal.Actions>
-                                        </Modal> */}
+                                        </Modal>
                                     </List.Content>
                                 </List.Content>
                             </List.Item>

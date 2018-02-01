@@ -187,7 +187,7 @@ class Users extends React.Component {
                                     <List.Content>
                                     <List.Header>{item.firstName} {item.lastName}</List.Header>
                                     <List.Content floated='right'>
-                                        <Modal trigger={<Button onClick={(e) => this.setUser(item,options)}><Button.Content><Icon name='write'/></Button.Content></Button>}>
+                                        <Modal closeIcon trigger={<Button onClick={(e) => this.setUser(item,options)}><Button.Content><Icon name='write'/></Button.Content></Button>}>
                                             <Modal.Header>Edit User</Modal.Header>
                                             <Modal.Content >
                                             <Modal.Description>
@@ -217,7 +217,7 @@ class Users extends React.Component {
                                             </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
-                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteUser(item)}/>} open={this.state.open}>
+                                        <Modal closeIcon size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteUser(item)}/>} open={this.state.open}>
                                             <Modal.Header>
                                                 Delete Your Account
                                             </Modal.Header>

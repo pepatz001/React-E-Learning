@@ -125,3 +125,13 @@ export const deleteComment = (_id,data) => {
     .then(data => data)
     .catch(error => error.response)
 }
+export const deleteTopic = (_id) => {
+  return axiosInstance.delete('/api/topic/deleteTopic/' + _id)
+    .then(data => data)
+    .catch(error => error.response)
+}
+export const editDepartment = (data) => {
+  return axiosInstance.put('/api/user/editDepartment/',data)
+    .then(data => data)
+    .catch(error => error.response)
+}

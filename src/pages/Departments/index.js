@@ -1,5 +1,5 @@
 import React from 'react';
-import { getDepartment , updateDepartment , deleteDepartment , createDepartment , updateContent , deleteContent } from '../../api'
+import { getDepartment , updateDepartment , deleteDepartment , createDepartment , updateContent , deleteContent , editDepartment } from '../../api'
 import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Transition } from 'semantic-ui-react'
 import CKEditor from 'react-ckeditor-wrapper';
 
@@ -79,11 +79,19 @@ class Departments extends React.Component {
                 name: this.state.departmentModal,
                 oldname: this.state.department
             }
-            console.log(data)
+            const dataUser = {
+                departmentOld: this.state.department,
+                department: this.state.departmentModal
+            }
+            // console.log(dataUser)
             updateDepartment(data)
-            .then(this.props.history.replace('/Crpdaz'))
-            .catch(err => console.error('Something went wrong.'))
+            .then(this.editDepartmentUser(dataUser))
         }
+    }
+
+    editDepartmentUser = (data) => {
+        editDepartment(data)
+        .then(this.props.history.replace('/Crpdaz'))
     }
 
     //updateContent CKeditor
@@ -209,7 +217,7 @@ class Departments extends React.Component {
                             <div dangerouslySetInnerHTML= {{__html: this.state.thisCode }}></div>
                             <Divider />
                             <Button content='Edit' onClick={this.toggleVisibility} />
-                            <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open}>
+                            <Modal closeIcon size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open}>
                                 <Modal.Header>
                                     Delete Your Content
                                 </Modal.Header>
@@ -291,7 +299,7 @@ class Departments extends React.Component {
                             <List.Item>
                                 <List.Content>
                                     <List.Header>
-                                        <Modal size='fullscreen' trigger={<a onClick={(e) => this.setContent(departments,item)}>{item}</a>}>
+                                        <Modal closeIcon size='fullscreen' trigger={<a onClick={(e) => this.setContent(departments,item)}>{item}</a>}>
                                             <Modal.Header>{item} Contents</Modal.Header>
                                             <Modal.Content >
                                                 <Modal.Description>
@@ -301,7 +309,7 @@ class Departments extends React.Component {
                                         </Modal>
                                     </List.Header>
                                     <List.Content floated='right'>
-                                        <Modal trigger={<Button onClick={(e) => this.setDepartment(item)}><Button.Content><Icon name='write'/></Button.Content></Button>}>
+                                        <Modal closeIcon trigger={<Button onClick={(e) => this.setDepartment(item)}><Button.Content><Icon name='write'/></Button.Content></Button>}>
                                             <Modal.Header>Edit Department</Modal.Header>
                                             <Modal.Content >
                                             <Modal.Description>
@@ -315,7 +323,7 @@ class Departments extends React.Component {
                                             </Modal.Description>
                                             </Modal.Content>
                                         </Modal>
-                                        <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteDepartment(item)}/>} open={this.state.open}>
+                                        <Modal closeIcon size='mini' trigger={<Button content='Delete' onClick={(e) => this.setDeleteDepartment(item)}/>} open={this.state.open}>
                                             <Modal.Header>
                                                 Delete Your Department
                                             </Modal.Header>
