@@ -274,9 +274,13 @@ p , ul , h2{
 }
 .ui.breadcrumb .active.section {
     color: rgb(241, 182, 0) !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
 .ui.breadcrumb a.section {
     color: #FFDFAA !important;
+    font-family: "Kanit",sans-serif !important;
+    font-weight: 400 !important;
 }
 
 .ui.table {

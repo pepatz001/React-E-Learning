@@ -172,9 +172,15 @@ class Departments extends React.Component {
                 name: this.state.contentName,
                 code: code
             }
+            const oldId = ''
+            const dataDepartment = this.state.allDepartments
+            const dataUpdate = dataDepartment.filter(item => item.update === '1')
+            const dataSort = dataUpdate.sort((a, b) => a.created - b.created).slice(0, 1)
+            // console.log(dataSort[0]._id)
             const data = {
                 id: _id,
-                content: thisContent
+                content: thisContent,
+                oldId: dataSort[0]._id
             }
             console.log(data)
             updateContent(data)
@@ -199,7 +205,7 @@ class Departments extends React.Component {
         const idContent = data.filter(item => item.name === department).map(list => list._id)
         const topic = []
         content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
-        //console.log(topic)
+        // console.log(topic)
         for(var i = 0; i < topic.length; i++){
             //console.log(topic[i])
             panesContent.push({ menuItem: <Menu.Item disabled><Menu.Header>{topic[i]} :</Menu.Header></Menu.Item> })

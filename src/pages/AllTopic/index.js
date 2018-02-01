@@ -31,12 +31,29 @@ class AllTopic extends React.Component {
         content = list.filter(item => item.name === localStorage.getItem('departmentClick')).map(list => list.content)
         const topic = []
         content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
-        this.setState({
-          contents: content,
-          topics: topic,
-          activeItem: content[0].name,
-          code: content[0].code
-        })
+        console.log(localStorage.getItem('departmentTopicClick'))
+        if(localStorage.getItem('departmentTopicClick') !== ''){
+            var thisCode = ''
+            content.forEach( v => 
+                v.name === localStorage.getItem('departmentTopicClick') ?
+                thisCode = v.code : null
+            )
+            this.setState({
+                contents: content,
+                topics: topic,
+                activeItem: localStorage.getItem('departmentTopicClick'),
+                code: thisCode
+              })
+              localStorage.setItem('departmentTopicClick','')
+        } else {
+            this.setState({
+                contents: content,
+                topics: topic,
+                activeItem: content[0].name,
+                code: content[0].code
+              })
+        }
+        // console.log(topic)
     }
     
     mapUser = (list) => {

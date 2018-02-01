@@ -4,7 +4,7 @@ import './Main.css'
 import Navbar from './Navbar'
 
 // import _ from 'lodash'
-import { getTopic } from '../api'
+import { getTopic , getUserDepartment , getDepartment } from '../api'
 // import CKEditor from 'react-ckeditor-wrapper'
 import { Container , Image , Responsive , Segment , Feed , Grid , Divider , Header , Label , Table } from "semantic-ui-react"
 import { Carousel } from 'react-responsive-carousel'
@@ -24,7 +24,19 @@ var dateFormat = require('dateformat')
 class Main extends React.Component {
 
   state = {
-    hotTopic: []
+    hotTopic: [],
+    courseUpdate: [],
+    courseNew: []
+  }
+
+  setCourse = (data) => {
+    // console.log(data)
+    const courseUpdate = data.filter(item => item.update === '1')
+    const courseNew = data.sort((a, b) => new Date(dateFormat(a.created,'yyyy-mm-dd').split('/').reverse()) - new Date(dateFormat(b.created,'yyyy-mm-dd').split('/').reverse())).reverse().slice(0, 3)
+    this.setState({
+      courseUpdate: courseUpdate,
+      courseNew: courseNew
+    })
   }
 
   setTopic = (topic) => {
@@ -38,21 +50,46 @@ class Main extends React.Component {
     }))
     const myData = count.sort((a, b) => a.offerLength - b.offerLength).reverse().slice(0, 5)
     this.setState({hotTopic: myData})
-    console.log(myData)
+    
+    getDepartment()
+    .then(department => this.setCourse(department))
+    .catch(err => console.error('Something went wrong.'))
+  }
+
+  mapUser = (list) => {
+    const item = list.filter(item => item.username === localStorage.username).map(item => item.department)
+    this.setState({department: item[0]})
+    localStorage.setItem('department', this.state.department)
+    if(this.state.department === 'admin'){
+      this.props.history.replace('/admin')
+    } else {
+        getTopic()
+        .then(topic => this.setTopic(topic))
+        .catch(err => console.error('Something went wrong.'))
+    }
   }
 
   componentWillMount() { 
-    getTopic()
-    .then(topic => this.setTopic(topic))
-    .catch(err => console.error('Something went wrong.'))
+    getUserDepartment()
+        .then(user => this.mapUser(user))
+        .catch(err => console.error('Something went wrong.'))
   }
+
   showTopic = (id) => {
     localStorage.setItem('idTopic',id)
     this.props.history.replace('/WebBoard/Topic')
   }
 
+  showDepartment = (name,topic) => {
+    localStorage.setItem('departmentClick', name)
+    // console.log(topic)
+    localStorage.setItem('departmentTopicClick', topic)
+    this.props.history.replace('/Crpdaz') //redirect
+  }
+
   render() {
     const hotTopics = this.state.hotTopic
+    const { courseUpdate , courseNew } = this.state
     return (
       <div className='body'>
         <Navbar history={this.props.history}>
@@ -76,24 +113,32 @@ class Main extends React.Component {
                   <Header as='h2' textAlign='left'>Courses</Header>
                   <Segment className='feedNew'>
                     <Feed>
-                      <Feed.Event>
-                        <Feed.Content>
-                          <Feed.Date>3 days ago</Feed.Date>
-                          <Feed.Summary>
-                            <Label className='gold' horizontal>Update!</Label>
-                            <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
-                          </Feed.Summary>
-                        </Feed.Content>
-                      </Feed.Event>
-                      <Feed.Event>
-                      <Feed.Content>
-                        <Feed.Date>3 days ago</Feed.Date>
-                        <Feed.Summary>
-                          <Label className='gold' horizontal>New!</Label>
-                          <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
-                        </Feed.Summary>
-                      </Feed.Content>
-                    </Feed.Event>
+                      {courseNew.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                        courseNew.map(item => //Loop
+                          <Feed.Event>
+                            <Feed.Content>
+                              <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
+                              <Feed.Summary>
+                                <Label className='gold' horizontal>New!</Label>
+                                <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                              </Feed.Summary><br/>
+                            </Feed.Content>
+                          </Feed.Event>
+                        )
+                        : null}
+                      {courseUpdate.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                          courseUpdate.map(item => //Loop
+                          <Feed.Event>
+                            <Feed.Content>
+                              <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
+                              <Feed.Summary>
+                                <Label className='gold' horizontal>Update!</Label>
+                                <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                              </Feed.Summary><br/>
+                            </Feed.Content>
+                          </Feed.Event>
+                        )
+                        : null}
                     </Feed>
                   </Segment>
                 </Grid.Column>
@@ -105,7 +150,7 @@ class Main extends React.Component {
                         {hotTopics.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
                           hotTopics.map(item => //Loop
                           <Table.Row>
-                              <Table.Cell width='12' className='hand'><a onClick={(e) => this.showTopic(item._id)}>{item.topicName}</a></Table.Cell>
+                              <Table.Cell width='12' className='hand'><a onClick={(e) => this.showTopic(item._id,item.topicName)}>{item.topicName}</a></Table.Cell>
                               <Table.Cell width='4' textAlign='right' className='date'>{dateFormat(item.created,'longDate')}</Table.Cell>
                           </Table.Row>
                         )
@@ -140,24 +185,32 @@ class Main extends React.Component {
               <Header as='h2' textAlign='left'>Courses</Header>
               <Segment className='feedNew'>
                 <Feed>
-                  <Feed.Event>
-                    <Feed.Content>
-                      <Feed.Date>3 days ago</Feed.Date>
-                      <Feed.Summary>
-                        <Label className='gold' horizontal>Update!</Label>
-                        <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
-                      </Feed.Summary>
-                    </Feed.Content>
-                  </Feed.Event>
-                  <Feed.Event>
-                    <Feed.Content>
-                      <Feed.Date>3 days ago</Feed.Date>
-                      <Feed.Summary>
-                        <Label className='gold' horizontal>New!</Label>
-                        <a onClick={(e) => console.log('test')}>You added Jenny Hess to your coworker group.</a>
-                      </Feed.Summary>
-                    </Feed.Content>
-                  </Feed.Event>
+                  {courseNew.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                    courseNew.map(item => //Loop
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
+                          <Feed.Summary>
+                            <Label className='gold' horizontal>New!</Label>
+                            <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                          </Feed.Summary><br/>
+                        </Feed.Content>
+                      </Feed.Event>
+                    )
+                    : null}
+                  {courseUpdate.length >= 0 ? //Javascript  //? คือ if else Syntax => ... ? true : false
+                      courseUpdate.map(item => //Loop
+                      <Feed.Event>
+                        <Feed.Content>
+                          <Feed.Date>{dateFormat(item.created,'longDate')}</Feed.Date>
+                          <Feed.Summary>
+                            <Label className='gold' horizontal>Update!</Label>
+                            <a onClick={(e) => this.showDepartment(item.name,item.content.name)}>{item.content.name}</a>
+                          </Feed.Summary><br/>
+                        </Feed.Content>
+                      </Feed.Event>
+                    )
+                    : null}
                 </Feed>
               </Segment>
               <Header as='h2' textAlign='left'>Hot Topics</Header>
