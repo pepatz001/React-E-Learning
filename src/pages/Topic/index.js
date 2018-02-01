@@ -2,7 +2,7 @@ import React from 'react'
 import localStorage from 'localStorage'
 import Navbar from '../Navbar'
 
-import { comment , getOneTopic } from '../../api'
+import { comment , getOneTopic , updateTopic } from '../../api'
 import CKEditor from 'react-ckeditor-wrapper'
 import { Divider , Container , Image , Segment , Responsive , Header , Breadcrumb , Comment , Button , Form } from "semantic-ui-react"
 
@@ -43,7 +43,7 @@ class WebBoard extends React.Component {
             description: this.state.code
         }
         const id = localStorage.getItem('idTopic')
-        console.log(id,data)
+        // console.log(id,data)
         comment(id,data)
         .then(data => {
             if (data.status === 200) {

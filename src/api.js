@@ -135,3 +135,8 @@ export const editDepartment = (data) => {
     .then(data => data)
     .catch(error => error.response)
 }
+export const updateTopic = (id,data) => {
+  return axiosInstance.put('/api/topic/update/'+ id,data)
+    .then(data => data)
+    .catch(error => error.response)
+}

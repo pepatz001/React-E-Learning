@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTopic  , deleteTopic , createTopic , comment , deleteComment } from '../../api'
+import { getTopic  , deleteTopic , createTopic , comment , deleteComment , updateTopic } from '../../api'
 import { Segment , List , Tab , Form , Button , Icon , Modal , Dropdown , Menu , Divider , Header , Comment } from 'semantic-ui-react'
 import CKEditor from 'react-ckeditor-wrapper';
 import TimeAgo from 'javascript-time-ago'
@@ -18,12 +18,16 @@ var dateFormat = require('dateformat')
 class WebBoardAdmin extends React.Component {
     state = { 
         code: "",
+        codeNew: "",
         open: false,
         nameModal: "",
+        nameModalNew: '',
         errorName: false,
+        errorNameNew: false,
         allTopics: [],
         codeComment: '',
-        thisId: ''
+        thisId: '',
+        idNew: ''
     }
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -59,7 +63,7 @@ class WebBoardAdmin extends React.Component {
             description: this.state.codeComment
         }
         const id = this.state.thisId
-        console.log(id,data)
+        // console.log(id,data)
         comment(id,data)
         .then(this.props.history.replace('/Crpdaz'))
     }
@@ -75,7 +79,7 @@ class WebBoardAdmin extends React.Component {
                 description: this.state.code,
                 owner: localStorage.getItem('username')
             }
-            console.log(data)
+            // console.log(data)
             createTopic(data)
             .then(data => {
                 if (data.status === 200) {
@@ -89,6 +93,10 @@ class WebBoardAdmin extends React.Component {
     //updateContent CKeditor
     updateContent(value) {
         this.setState({code: value})
+    }
+    
+    updateContentNew(value) {
+        this.setState({codeNew: value})
     }
 
     updateContentComment(value) {
@@ -105,6 +113,30 @@ class WebBoardAdmin extends React.Component {
         deleteComment(idTopic,dataNew)
         .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
+    }
+
+    setTopic = (id,name,description) => {
+        this.setState({
+            idNew: id,
+            nameModalNew: name,
+            codeNew: description
+        })
+    }
+
+    editTopic = () => {
+        if(this.state.nameModalNew === ''){
+            this.setState({ errorNameNew: true })
+        } else {
+            this.setState({ errorNameNew: false })
+            const data = {
+                topicName: this.state.nameModalNew,
+                description: this.state.codeNew
+            }
+            // console.log(data)
+            updateTopic(this.state.idNew,data)
+            .then(this.props.history.replace('/Crpdaz'))
+            .catch(err => console.error('Something went wrong.'))
+        }
     }
 
     close = () => this.setState({ open: false })
@@ -165,6 +197,24 @@ class WebBoardAdmin extends React.Component {
                                         </Modal>
                                     </List.Header>
                                     <List.Content floated='right'>
+                                        <Modal closeIcon trigger={<Button onClick={(e) => this.setTopic(item._id,item.topicName,item.description)}><Button.Content><Icon name='write'/></Button.Content></Button>}>
+                                            <Modal.Header>Edit Topic</Modal.Header>
+                                            <Modal.Content >
+                                            <Modal.Description>
+                                            <Form onSubmit={this.editTopic}>
+                                                <Form.Field required>
+                                                    <label>Name</label>
+                                                    <Form.Input name='nameModalNew' error={this.state.errorNameNew} value={this.state.nameModalNew} onChange={this.handleChangeModal} placeholder='Name' />
+                                                </Form.Field>
+                                                <Form.Field>
+                                                    <label>Descriptions</label>
+                                                    <CKEditor value={this.state.codeNew} onChange={this.updateContentNew.bind(this)} config={{readOnly: false}}/>
+                                                </Form.Field>
+                                                <Form.Button content='Submit' />
+                                            </Form>
+                                            </Modal.Description>
+                                            </Modal.Content>
+                                        </Modal>
                                         <Modal size='mini' trigger={<Button content='Delete' onClick={(e) => this.setState({open: true})}/>} open={this.state.open} closeIcon>
                                             <Modal.Header>
                                                 Delete this Topic

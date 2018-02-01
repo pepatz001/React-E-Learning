@@ -32,7 +32,7 @@ class WebBoard extends React.Component {
         }))
         const myData = count.sort((a, b) => a.offerLength - b.offerLength).reverse().slice(0, 5)
         this.setState({hotTopic: myData})
-        console.log(myData)
+        // console.log(myData)
     }
 
     mapUser = (list) => {
@@ -69,7 +69,7 @@ class WebBoard extends React.Component {
                 description: this.state.code,
                 owner: localStorage.getItem('username')
             }
-            console.log(data)
+            // console.log(data)
             createTopic(data)
             .then(data => {
                 if (data.status === 200) {

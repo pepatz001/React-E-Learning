@@ -74,7 +74,7 @@ class Users extends React.Component {
                 email: email,
                 tel: tel
             }
-            console.log(data)
+            // console.log(data)
             signup(data)
             .then(data => {
                 if (data.status === 200) {
@@ -113,7 +113,7 @@ class Users extends React.Component {
     }
 
     deleteUser = (data) => {
-        console.log(data._id)
+        // console.log(data._id)
         deleteUser(data)
         .then(this.props.history.replace('/Crpdaz'))
         .catch(err => console.error('Something went wrong.'))
@@ -142,7 +142,7 @@ class Users extends React.Component {
                 department: this.state.departmentModal
                 
             }
-            console.log(data)
+            // console.log(data)
             updateUser(data,this.state.id)
             .then(this.props.history.replace('/Crpdaz'))
             .catch(err => console.error('Something went wrong.'))

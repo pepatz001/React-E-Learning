@@ -74,7 +74,7 @@ class Departments extends React.Component {
             this.setState({ errorDepartment: true })
         } else {
             this.setState({ errorDepartment: false })
-            console.log(this.state)
+            // console.log(this.state)
             const data = {
                 name: this.state.departmentModal,
                 oldname: this.state.department
@@ -182,7 +182,7 @@ class Departments extends React.Component {
                 content: thisContent,
                 oldId: dataSort[0]._id
             }
-            console.log(data)
+            // console.log(data)
             updateContent(data)
             .then(this.props.history.replace('/Crpdaz'))
             .catch(err => console.error('Something went wrong.'))
@@ -198,7 +198,7 @@ class Departments extends React.Component {
     close = () => this.setState({ open: false })
 
     setContent = (data,department) => {
-        console.log(data,department)
+        // console.log(data,department)
         const panesContent = []
         var content = [{topic:"",name:"",code:""}]
         content = data.filter(item => item.name === department).map(list => list.content)

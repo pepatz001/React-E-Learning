@@ -31,7 +31,7 @@ class AllTopic extends React.Component {
         content = list.filter(item => item.name === localStorage.getItem('departmentClick')).map(list => list.content)
         const topic = []
         content.forEach( v => topic.indexOf(v.topic) === -1 ? topic.push(v.topic) : null)
-        console.log(localStorage.getItem('departmentTopicClick'))
+        // console.log(localStorage.getItem('departmentTopicClick'))
         if(localStorage.getItem('departmentTopicClick') !== ''){
             var thisCode = ''
             content.forEach( v => 
